@@ -1,0 +1,1 @@
+{"name":"sfi\/news","type":"typo3-flow-package","description":"Tiny node-based news extension for sfi.ru","require":{"typo3\/flow":"*"},"autoload":{"psr-0":{"Sfi\\News":"Classes"}}}

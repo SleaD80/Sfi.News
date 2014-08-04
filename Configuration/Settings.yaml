@@ -1,0 +1,26 @@
+TYPO3:
+  Neos:
+    nodeTypes:
+      groups:
+        news:
+          position: 'end'
+          label: 'News'
+    typoScript:
+      autoInclude:
+        'Sfi.News': TRUE
+Sfi:
+  News:
+    list:
+      numberOfItems: 6
+      pagination:
+        itemsPerPage: 10
+        maximumNumberOfLinks: 15
+      sortProperty: 'date'
+      sortOrder: 'DESC'
+    articleShort:
+      thumbnailWidth: 420
+      thumbnailHeight: 222
+      dateFormat: 'd.m'
+    detail:
+    articleFull:
+      dateFormat: 'F jS, Y'

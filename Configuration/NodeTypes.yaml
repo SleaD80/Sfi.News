@@ -1,0 +1,89 @@
+'Sfi.News:List':
+  superTypes:
+    - 'TYPO3.Neos:Content'
+  ui:
+    label: 'News list'
+    icon: 'icon-list'
+    inlineEditable: TRUE
+    group: 'news'
+
+
+'Sfi.News:Category':
+  superTypes: ['TYPO3.Neos:Document']
+  ui:
+    label: 'News category'
+    icon: 'icon-file'
+    group: 'news'
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+
+
+'Sfi.News:News':
+  superTypes: ['TYPO3.Neos:Document']
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+    assets:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: 'News'
+    icon: 'icon-file-text'
+    group: 'news'
+    inlineEditable: FALSE
+    inspector:
+      groups:
+        news:
+          label: 'News'
+  properties:
+    teaser:
+      type: string
+      defaultValue: 'News-teaser-goes-here'
+      validation:
+        'TYPO3.Neos/Validation/StringLengthValidator':
+          minimum: 1
+          maximum: 500
+    important:
+      type: boolean
+      ui:
+        label: 'Important'
+        inspector:
+          group: 'news'
+    authorName:
+      type: string
+      validation:
+        'TYPO3.Neos/Validation/StringLengthValidator':
+          minimum: 1
+          maximum: 255
+    date:
+      type: date
+      ui:
+        label: 'Date'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+      validation:
+        'TYPO3.Neos/Validation/NotEmptyValidator': []
+        'TYPO3.Neos/Validation/DateTimeValidator': []
+    relatedNews:
+      type: references
+      ui:
+        label: 'Related news'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+          editorOptions:
+            nodeTypes: ['Sfi.News:News']
+    categories:
+      type: references
+      ui:
+        label: 'Categories'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+          editorOptions:
+            nodeTypes: ['Sfi.News:Category']
+    originalIdentifier:
+      type: integer
+
+

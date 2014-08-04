@@ -1,0 +1,39 @@
+#Molecular level
+#These things connect straight to frontend design pattern library, defined in dedicated plugin
+ 
+#Short rendering of article, used in NewsList
+prototype(Sfi.News:ArticleShort) < prototype(TYPO3.TypoScript:Template) {
+	@override.configuration = ${Configuration.setting('Sfi.News.articleShort')}
+	configuration = ${configuration}
+
+	templatePath = 'resource://Sfi.News/Private/Templates/ArticleShort.html'
+	#pass current item node for linking
+	node = ${q(node).get(0)}
+
+ 	title = ${q(node).property('title')}
+ 	date = ${q(node).property('date')}
+	teaser = ${q(node).property('teaser')}
+	# first image found becomes the thumbnail image 
+	thumbnailImage = ${q(node).find('[instanceof TYPO3.Neos.NodeTypes:Image]').first().get(0)}
+ 	#parrent node is the category
+	category = ${q(node).parent().get(0)}
+}
+ 
+#Full rendering of article, used in NewsDetail
+prototype(Sfi.News:ArticleFull) < prototype(TYPO3.TypoScript:Template) {
+	@override.configuration = ${Configuration.setting('Sfi.News.articleFull')}
+	configuration = ${configuration}
+
+ 	templatePath = 'resource://Sfi.News/Private/Templates/ArticleFull.html'
+
+ 	node = ${q(node).get(0)}
+	title = ${q(node).property('title')}
+	teaser = ${q(node).property('teaser')}
+	main = TYPO3.Neos:ContentCollection
+	main.nodePath = 'main'	
+ 
+	assets = TYPO3.Neos:ContentCollection
+	assets.nodePath = 'assets'
+ 
+	category = ${q(node).parent().get(0)}
+}
