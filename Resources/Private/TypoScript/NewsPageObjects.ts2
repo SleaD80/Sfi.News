@@ -2,11 +2,10 @@
 prototype(Sfi.News:Page) < prototype(Sfi.Sfi:Page) {
 	#All it does is just override main content
 	body.content.main = Sfi.News:Detail
-	
 }
 #Create object from prototype
 newsPage = Sfi.News:Page
- 
+
 #Route the rendering to our newsPage object
 root.newsPage {
 	condition = ${q(node).is('[instanceof Sfi.News:News]')}

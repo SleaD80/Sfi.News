@@ -9,7 +9,6 @@ prototype(Sfi.News:ArticleShort) < prototype(TYPO3.TypoScript:Template) {
 	templatePath = 'resource://Sfi.News/Private/Templates/ArticleShort.html'
 	#pass current item node for linking
 	node = ${q(node).get(0)}
-
  	title = ${q(node).property('title')}
  	date = ${q(node).property('date')}
 	teaser = ${q(node).property('teaser')}
@@ -29,6 +28,9 @@ prototype(Sfi.News:ArticleFull) < prototype(TYPO3.TypoScript:Template) {
  	node = ${q(node).get(0)}
 	title = ${q(node).property('title')}
 	teaser = ${q(node).property('teaser')}
+	author = ${q(node).property('author')}
+	date = ${q(node).property('date')}
+
 	main = TYPO3.Neos:ContentCollection
 	main.nodePath = 'main'	
  

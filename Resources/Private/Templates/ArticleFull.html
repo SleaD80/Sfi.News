@@ -5,6 +5,7 @@
 	<neos:contentElement.wrap node="{node}">
 		<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
 		<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
+		<div class="Article-Author">{neos:contentElement.editable(property: 'author')}</div>
 		<div class="Article-Content">{main -> f:format.raw()}</div>
 		<div class="Article-Images">{assets -> f:format.raw()}</div>
 	</neos:contentElement.wrap>

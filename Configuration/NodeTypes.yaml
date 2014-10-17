@@ -6,7 +6,9 @@
     icon: 'icon-list'
     inlineEditable: TRUE
     group: 'news'
-
+  constraints:
+    nodeTypes:
+      '*': false
 
 'Sfi.News:Category':
   superTypes: ['TYPO3.Neos:Document']
@@ -17,10 +19,16 @@
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
-
+  constraints:
+    nodeTypes:
+      '*': false
+      'Sfi.News:News': true
 
 'Sfi.News:News':
   superTypes: ['TYPO3.Neos:Document']
+  constraints:
+    nodeTypes:
+      '*': false
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
@@ -30,15 +38,68 @@
     label: 'News'
     icon: 'icon-file-text'
     group: 'news'
-    inlineEditable: FALSE
     inspector:
       groups:
         news:
           label: 'News'
   properties:
+    title:
+      validation: null
+      ui:
+        inlineEditable: true
+        inspector:
+          group: null
+        aloha:
+          placeholder: 'Enter title here'
+          format:
+            b: false
+            i: false
+            u: false
+            sub: false
+            sup: false
+            p: false
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: true
+          alignment: {  }
+          formatlesspaste:
+            button: false
+            formatlessPasteOption: true
     teaser:
       type: string
-      defaultValue: 'News-teaser-goes-here'
+      ui:
+        label: 'Teaser text'
+        inlineEditable: true
+        inspector:
+          group: null
+        aloha:
+          placeholder: 'Enter teaser here'
+          format:
+            b: true
+            i: true
+            u: false
+            sub: false
+            sup: false
+            p: true
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: true
+          alignment: {  }
+          formatlesspaste:
+            button: false
+            formatlessPasteOption: true
       validation:
         'TYPO3.Neos/Validation/StringLengthValidator':
           minimum: 1
@@ -49,12 +110,36 @@
         label: 'Important'
         inspector:
           group: 'news'
-    authorName:
+    author:
       type: string
-      validation:
-        'TYPO3.Neos/Validation/StringLengthValidator':
-          minimum: 1
-          maximum: 255
+      validation: null
+      ui:
+        label: 'Author name'
+        inlineEditable: true
+        inspector:
+          group: null
+        aloha:
+          placeholder: 'Enter news author here'
+          format:
+            b: false
+            i: false
+            u: false
+            sub: false
+            sup: false
+            p: false
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: true
+          alignment: {  }
+          formatlesspaste:
+            button: false
+            formatlessPasteOption: true
     date:
       type: date
       ui:
@@ -63,7 +148,6 @@
         inspector:
           group: 'news'
       validation:
-        'TYPO3.Neos/Validation/NotEmptyValidator': []
         'TYPO3.Neos/Validation/DateTimeValidator': []
     relatedNews:
       type: references
@@ -84,6 +168,5 @@
           editorOptions:
             nodeTypes: ['Sfi.News:Category']
     originalIdentifier:
-      type: integer
-
+      type: string
 
