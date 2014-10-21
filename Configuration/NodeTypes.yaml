@@ -1,21 +1,22 @@
+
 'Sfi.News:List':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
     label: 'News list'
-    icon: 'icon-list'
-    inlineEditable: TRUE
-    group: 'news'
+    icon: icon-list
+    inlineEditable: true
+    group: news
   constraints:
     nodeTypes:
       '*': false
-
 'Sfi.News:Category':
-  superTypes: ['TYPO3.Neos:Document']
+  superTypes:
+    - 'TYPO3.Neos:Document'
   ui:
     label: 'News category'
-    icon: 'icon-file'
-    group: 'news'
+    icon: icon-file
+    group: news
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
@@ -23,9 +24,9 @@
     nodeTypes:
       '*': false
       'Sfi.News:News': true
-
 'Sfi.News:News':
-  superTypes: ['TYPO3.Neos:Document']
+  superTypes:
+    - 'TYPO3.Neos:Document'
   constraints:
     nodeTypes:
       '*': false
@@ -35,13 +36,13 @@
     assets:
       type: 'TYPO3.Neos:ContentCollection'
   ui:
-    label: 'News'
-    icon: 'icon-file-text'
-    group: 'news'
+    label: News
+    icon: icon-file-text
+    group: news
     inspector:
       groups:
         news:
-          label: 'News'
+          label: News
   properties:
     title:
       validation: null
@@ -101,15 +102,15 @@
             button: false
             formatlessPasteOption: true
       validation:
-        'TYPO3.Neos/Validation/StringLengthValidator':
+        TYPO3.Neos/Validation/StringLengthValidator:
           minimum: 1
           maximum: 500
     important:
       type: boolean
       ui:
-        label: 'Important'
+        label: Important
         inspector:
-          group: 'news'
+          group: news
     author:
       type: string
       validation: null
@@ -143,30 +144,31 @@
     date:
       type: date
       ui:
-        label: 'Date'
-        reloadIfChanged: TRUE
+        label: Date
+        reloadIfChanged: true
         inspector:
-          group: 'news'
+          group: news
       validation:
-        'TYPO3.Neos/Validation/DateTimeValidator': []
+        TYPO3.Neos/Validation/DateTimeValidator: {  }
     relatedNews:
       type: references
       ui:
         label: 'Related news'
-        reloadIfChanged: TRUE
+        reloadIfChanged: true
         inspector:
-          group: 'news'
+          group: news
           editorOptions:
-            nodeTypes: ['Sfi.News:News']
+            nodeTypes:
+              - 'Sfi.News:News'
     categories:
       type: references
       ui:
-        label: 'Categories'
-        reloadIfChanged: TRUE
+        label: Categories
+        reloadIfChanged: true
         inspector:
-          group: 'news'
+          group: news
           editorOptions:
-            nodeTypes: ['Sfi.News:Category']
+            nodeTypes:
+              - 'Sfi.News:Category'
     originalIdentifier:
       type: string
-
