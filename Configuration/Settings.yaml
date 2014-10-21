@@ -1,13 +1,14 @@
+
 TYPO3:
   Neos:
     nodeTypes:
       groups:
         news:
-          position: 'end'
-          label: 'News'
+          position: end
+          label: News
     typoScript:
       autoInclude:
-        'Sfi.News': TRUE
+        Sfi.News: true
 Sfi:
   News:
     list:
@@ -15,12 +16,12 @@ Sfi:
       pagination:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
-      sortProperty: 'date'
-      sortOrder: 'DESC'
+      sortProperty: date
+      sortOrder: DESC
     articleShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'd.m'
-    detail:
+      dateFormat: d.m
+    detail: null
     articleFull:
       dateFormat: 'F jS, Y'
