@@ -2,7 +2,7 @@
 #These things connect straight to frontend design pattern library, defined in dedicated plugin
  
 #Short rendering of article, used in NewsList
-prototype(Sfi.News:ArticleShort) < prototype(TYPO3.TypoScript:Template) {
+prototype(Sfi.News:ArticleShort) < prototype(TYPO3.Neos:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.articleShort')}
 	configuration = ${configuration}
 
@@ -19,7 +19,7 @@ prototype(Sfi.News:ArticleShort) < prototype(TYPO3.TypoScript:Template) {
 }
  
 #Full rendering of article, used in NewsDetail
-prototype(Sfi.News:ArticleFull) < prototype(TYPO3.TypoScript:Template) {
+prototype(Sfi.News:ArticleFull) < prototype(TYPO3.Neos:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.articleFull')}
 	configuration = ${configuration}
 
