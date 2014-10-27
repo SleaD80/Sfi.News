@@ -1,7 +1,7 @@
 #Organism level
  
 #List all articles from website
-prototype(Sfi.News:List) < prototype(TYPO3.Neos:Template) {
+prototype(Sfi.News:List) < prototype(TYPO3.TypoScript:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.list')}
 	#@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
 	configuration = ${configuration}
@@ -21,7 +21,7 @@ prototype(Sfi.News:List) < prototype(TYPO3.Neos:Template) {
 }
  
 #Display full view of article
-prototype(Sfi.News:Detail) < prototype(TYPO3.Neos:Template) {
+prototype(Sfi.News:Detail) < prototype(TYPO3.TypoScript:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.detail')}
 	configuration = ${configuration}
 

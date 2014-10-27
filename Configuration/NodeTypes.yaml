@@ -31,10 +31,12 @@
     nodeTypes:
       '*': false
   childNodes:
+    coverPhoto:
+      type: 'TYPO3.Neos.NodeTypes:Image'
     main:
       type: 'TYPO3.Neos:ContentCollection'
-    assets:
-      type: 'TYPO3.Neos:ContentCollection'
+    gallery:
+      type: 'Sfi.Widgets:Carousel'
   ui:
     label: News
     icon: icon-file-text
@@ -143,6 +145,7 @@
             formatlessPasteOption: true
     date:
       type: date
+      defaultValue: 'now'
       ui:
         label: Date
         reloadIfChanged: true

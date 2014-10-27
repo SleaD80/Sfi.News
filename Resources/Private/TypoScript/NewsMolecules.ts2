@@ -2,7 +2,7 @@
 #These things connect straight to frontend design pattern library, defined in dedicated plugin
  
 #Short rendering of article, used in NewsList
-prototype(Sfi.News:ArticleShort) < prototype(TYPO3.Neos:Template) {
+prototype(Sfi.News:ArticleShort) < prototype(TYPO3.TypoScript:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.articleShort')}
 	configuration = ${configuration}
 
@@ -13,13 +13,13 @@ prototype(Sfi.News:ArticleShort) < prototype(TYPO3.Neos:Template) {
  	date = ${q(node).property('date')}
 	teaser = ${q(node).property('teaser')}
 	# first image found becomes the thumbnail image 
-	thumbnailImage = ${q(node).find('[instanceof TYPO3.Neos.NodeTypes:Image]').first().get(0)}
+	thumbnailImage = ${q(node).children('coverPhoto').get(0)}
  	#parrent node is the category
 	category = ${q(node).parent().get(0)}
 }
  
 #Full rendering of article, used in NewsDetail
-prototype(Sfi.News:ArticleFull) < prototype(TYPO3.Neos:Template) {
+prototype(Sfi.News:ArticleFull) < prototype(TYPO3.TypoScript:Template) {
 	@override.configuration = ${Configuration.setting('Sfi.News.articleFull')}
 	configuration = ${configuration}
 
@@ -31,11 +31,30 @@ prototype(Sfi.News:ArticleFull) < prototype(TYPO3.Neos:Template) {
 	author = ${q(node).property('author')}
 	date = ${q(node).property('date')}
 
+	coverPhoto = TYPO3.Neos.NodeTypes:Image{
+		@override.node = ${q(node).children('coverPhoto').get(0)}
+	}
+	gallery = Sfi.Widgets:Carousel{
+		content.collection = ${q(node).children('gallery').children()}
+		attributes.class = 'Carousel js-carousel-2x'
+	}
+
 	main = TYPO3.Neos:ContentCollection
 	main.nodePath = 'main'	
  
-	assets = TYPO3.Neos:ContentCollection
-	assets.nodePath = 'assets'
- 
 	category = ${q(node).parent().get(0)}
+
+    @cache {
+        mode = 'cached'
+        maximumLifetime = '0'
+        entryIdentifier {
+                node = ${node}
+        }
+        entryTags {
+            # Whenever the node changes the matched condition could change
+            1 = ${'Node_' + documentNode.identifier}
+            # Whenever one of the parent nodes changes the layout could change
+            2 = ${'DescendantOf_' + documentNode.identifier}
+        }
+    }
 }
