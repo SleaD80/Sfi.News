@@ -1,4 +1,3 @@
-
 'Sfi.News:List':
   superTypes:
     - 'TYPO3.Neos:Content'
@@ -10,6 +9,7 @@
   constraints:
     nodeTypes:
       '*': false
+
 'Sfi.News:Category':
   superTypes:
     - 'TYPO3.Neos:Document'
@@ -17,13 +17,35 @@
     label: 'News category'
     icon: icon-file
     group: news
+    inspector:
+      groups:
+        news:
+          label: News
+          position: 5
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
+  properties:
+    variant:
+      defaultValue: 'Simple'
+      type: string
+      ui:
+        label: 'News variant'
+        reloadIfChanged: false
+        inspector:
+          group: news
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              'Simple':
+                label: 'Simple'
+              'Article':
+                label: 'Article'
   constraints:
     nodeTypes:
       '*': false
       'Sfi.News:News': true
+
 'Sfi.News:News':
   superTypes:
     - 'TYPO3.Neos:Document'

@@ -1,3 +1,2 @@
-include: NewsMolecules.ts2
 include: NewsOrganisms.ts2
 include: NewsPageObjects.ts2

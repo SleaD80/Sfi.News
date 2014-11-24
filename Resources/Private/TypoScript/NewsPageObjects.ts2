@@ -1,16 +1,15 @@
-#We begin News Page prototype, extending default site page object
-prototype(Sfi.News:Page) < prototype(Sfi.Sfi:Page) {
-	#All it does is just override main content
-	body{
-		content.main = Sfi.News:Detail
-		header.withLine = ${true}
-	}
-}
 #Create object from prototype
-newsPage = Sfi.News:Page
-
+newsPage = Sfi.Sfi:Page
+newsPage.body.content.main = Sfi.News:Detail
 #Route the rendering to our newsPage object
 root.newsPage {
 	condition = ${q(node).is('[instanceof Sfi.News:News]')}
 	renderPath = '/newsPage'
+}
+
+categoryPage = Sfi.Sfi:Page
+categoryPage.body.content.main>
+root.categoryPage {
+	condition = ${q(node).is('[instanceof Sfi.News:Category]')}
+	renderPath = '/categoryPage'
 }

@@ -1,15 +1,57 @@
-#Organism level
- 
-#List all articles from website
-prototype(Sfi.News:List) < prototype(TYPO3.TypoScript:Template) {
-	@override.configuration = ${Configuration.setting('Sfi.News.list')}
-	#@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
+#Display full view of article
+prototype(Sfi.News:Detail) < prototype(TYPO3.TypoScript:Template) {
+	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
+	@override.configuration = ${Configuration.setting('Sfi.News.detail')}
 	configuration = ${configuration}
 
+	node = ${q(node).get(0)}
+	title = ${q(node).property('title')}
+	teaser = ${q(node).property('teaser')}
+	author = ${q(node).property('author')}
+	date = ${q(node).property('date')}
 
-	templatePath>
+	coverPhoto = TYPO3.Neos.NodeTypes:Image{
+		@override.node = ${q(node).children('coverPhoto').get(0)}
+	}
+	gallery = Sfi.Widgets:Carousel{
+		content.collection = ${q(node).children('gallery').children()}
+		attributes.class = 'Carousel js-carousel-2x'
+	}
+
+	main = TYPO3.Neos:ContentCollection
+	main.nodePath = 'main'	
+
+	category = ${q(node).parent().get(0)}
+
+	#####
+	moreNews = Sfi.News:List{
+		templatePath = 'resource://Sfi.News/Private/Templates/NewsListMoreNews.html'
+	}
+}
+
+#Breif rendering of article, used in NewsList
+prototype(Sfi.News:Short) < prototype(TYPO3.TypoScript:Template) {
+	templatePath = 'resource://Sfi.News/Private/Templates/NewsShort.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.short')}
+	configuration = ${configuration}
+
+	#pass current item node for linking
+	node = ${q(node).get(0)}
+	title = ${q(node).property('title')}
+	date = ${q(node).property('date')}
+	teaser = ${q(node).property('teaser')}
+	# first image found becomes the thumbnail image 
+	thumbnailImage = ${q(node).children('coverPhoto').get(0)}
+	#parrent node is the category
+	category = ${q(node).parent().get(0)}
+}
+
+#List all articles
+prototype(Sfi.News:List) < prototype(TYPO3.TypoScript:Template) {
 	templatePath = 'resource://Sfi.News/Private/Templates/NewsList.html'
-	
+	@override.configuration = ${Configuration.setting('Sfi.News.list')}
+	configuration = ${configuration}
+
 	#Find all nodes of type News
 	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
 	#sort
@@ -17,18 +59,5 @@ prototype(Sfi.News:List) < prototype(TYPO3.TypoScript:Template) {
 	#limit
 	newsCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
 	#This object will be used to render news articles
-	newsItem = Sfi.News:ArticleShort
-}
- 
-#Display full view of article
-prototype(Sfi.News:Detail) < prototype(TYPO3.TypoScript:Template) {
-	@override.configuration = ${Configuration.setting('Sfi.News.detail')}
-	configuration = ${configuration}
-
-	templatePath = 'resource://Sfi.News/Private/Templates/NewsDetail.html'
-	#this will render main article
-	article = Sfi.News:ArticleFull
-	#pull up other relevant things:
-	#...relatedArticles = ListOfRelatedArticlesObject.. you get the point
-	#...comments = someCommentModule
+	newsItem = Sfi.News:Short
 }

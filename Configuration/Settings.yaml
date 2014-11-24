@@ -18,10 +18,9 @@ Sfi:
         maximumNumberOfLinks: 15
       sortProperty: date
       sortOrder: DESC
-    articleShort:
+    short:
       thumbnailWidth: 420
       thumbnailHeight: 222
       dateFormat: d.m
-    detail: null
-    articleFull:
+    detail:
       dateFormat: 'F jS, Y'
