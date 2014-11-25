@@ -1,10 +1,9 @@
 #Display full view of article
-prototype(Sfi.News:Detail) < prototype(TYPO3.TypoScript:Template) {
+prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
-	@override.configuration = ${Configuration.setting('Sfi.News.detail')}
+	@override.configuration = ${Configuration.setting('Sfi.News.newsDetail')}
 	configuration = ${configuration}
 
-	node = ${q(node).get(0)}
 	title = ${q(node).property('title')}
 	teaser = ${q(node).property('teaser')}
 	author = ${q(node).property('author')}
@@ -24,19 +23,17 @@ prototype(Sfi.News:Detail) < prototype(TYPO3.TypoScript:Template) {
 	category = ${q(node).parent().get(0)}
 
 	#####
-	moreNews = Sfi.News:List{
-		templatePath = 'resource://Sfi.News/Private/Templates/NewsListMoreNews.html'
+	moreNews = Sfi.News:NewsList{
+		attributes.class = 'NewsList'
 	}
 }
 
 #Breif rendering of article, used in NewsList
-prototype(Sfi.News:Short) < prototype(TYPO3.TypoScript:Template) {
+prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 	templatePath = 'resource://Sfi.News/Private/Templates/NewsShort.html'
-	@override.configuration = ${Configuration.setting('Sfi.News.short')}
+	@override.configuration = ${Configuration.setting('Sfi.News.newsShort')}
 	configuration = ${configuration}
 
-	#pass current item node for linking
-	node = ${q(node).get(0)}
 	title = ${q(node).property('title')}
 	date = ${q(node).property('date')}
 	teaser = ${q(node).property('teaser')}
@@ -46,18 +43,36 @@ prototype(Sfi.News:Short) < prototype(TYPO3.TypoScript:Template) {
 	category = ${q(node).parent().get(0)}
 }
 
-#List all articles
-prototype(Sfi.News:List) < prototype(TYPO3.TypoScript:Template) {
-	templatePath = 'resource://Sfi.News/Private/Templates/NewsList.html'
-	@override.configuration = ${Configuration.setting('Sfi.News.list')}
+prototype(Sfi.News:NewsList) < prototype(TYPO3.Neos:Content) {
+	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	configuration = ${configuration}
 
-	#Find all nodes of type News
+	#Public
 	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
 	#sort
 	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
 	#limit
 	newsCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
 	#This object will be used to render news articles
-	newsItem = Sfi.News:Short
+	listTitle = ${configuration.listTitle}
+	attributes.class = ${configuration.class}
+
+	#Public
+	newsItem = Sfi.News:NewsShort
+}
+
+
+prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
+	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
+}
+
+prototype(Sfi.News:TopList) < prototype(Sfi.News:NewsList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
+
+	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
+	newsItem>
+	newsItem = Sfi.News:TopShort
 }

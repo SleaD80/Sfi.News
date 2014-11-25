@@ -1,4 +1,3 @@
-
 TYPO3:
   Neos:
     nodeTypes:
@@ -11,16 +10,43 @@ TYPO3:
         Sfi.News: true
 Sfi:
   News:
-    list:
+    newsList:
       numberOfItems: 6
       pagination:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
       sortProperty: date
       sortOrder: DESC
-    short:
+      listTitle: 'Новости СФИ'
+      class: 'medium-block-grid-2 large-block-grid-3'
+    newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
       dateFormat: d.m
-    detail:
+    newsDetail:
       dateFormat: 'F jS, Y'
+    announcementsList:
+      numberOfItems: 6
+      pagination:
+        itemsPerPage: 10
+        maximumNumberOfLinks: 15
+      sortProperty: date
+      sortOrder: DESC
+      listTitle: 'Анонсы'
+      class: 'medium-block-grid-2 large-block-grid-3'
+    announcementShort:
+      thumbnailWidth: 420
+      thumbnailHeight: 222
+      dateFormat: d.m
+    announcementDetail:
+      dateFormat: 'F jS, Y'
+    topList:
+      numberOfItems: 1
+      sortProperty: date
+      sortOrder: DESC
+      listTitle: 'Жутко важное'
+      class: ''
+    topShort:
+      thumbnailWidth: 600
+      thumbnailHeight: 300
+      dateFormat: d.m

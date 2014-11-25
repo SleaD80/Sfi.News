@@ -1,2 +1,3 @@
-include: NewsOrganisms.ts2
-include: NewsPageObjects.ts2
+include: News.ts2
+include: Announcements.ts2
+include: PageObjects.ts2

@@ -1,11 +1,17 @@
-#Create object from prototype
+announcementPage = Sfi.Sfi:Page
+announcementPage.body.content.main = Sfi.News:AnnouncementDetail
+root.announcementPage {
+	condition = ${q(node).is('[instanceof Sfi.News:Announcement]')}
+	renderPath = '/announcementPage'
+}
+
 newsPage = Sfi.Sfi:Page
-newsPage.body.content.main = Sfi.News:Detail
-#Route the rendering to our newsPage object
+newsPage.body.content.main = Sfi.News:NewsDetail
 root.newsPage {
 	condition = ${q(node).is('[instanceof Sfi.News:News]')}
 	renderPath = '/newsPage'
 }
+
 
 categoryPage = Sfi.Sfi:Page
 categoryPage.body.content.main>

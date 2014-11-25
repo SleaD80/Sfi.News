@@ -1,0 +1,28 @@
+prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
+	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementDetail.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.announcementDetail')}
+
+	place = ${q(node).property('place')}
+
+	#####
+	moreNews = Sfi.News:AnnouncementsList{
+		attributes.class = ''
+	}
+}
+
+prototype(Sfi.News:AnnouncementShort) < prototype(Sfi.News:NewsShort) {
+	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementShort.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.announcementShort')}
+
+	place = ${q(node).property('place')}
+}
+
+prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:NewsList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.announcementsList')}
+
+	#Find all nodes of type News
+	newsCollection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
+	#This object will be used to render news articles
+	newsItem = Sfi.News:AnnouncementShort
+}

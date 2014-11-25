@@ -1,4 +1,4 @@
-'Sfi.News:List':
+'Sfi.News:NewsList':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
@@ -9,6 +9,18 @@
   constraints:
     nodeTypes:
       '*': false
+
+'Sfi.News:AnnouncementsList':
+  superTypes:
+    - 'Sfi.News:NewsList'
+  ui:
+    label: 'Announcements list'
+
+'Sfi.News:TopList':
+  superTypes:
+    - 'Sfi.News:NewsList'
+  ui:
+    label: 'Top list'
 
 'Sfi.News:Category':
   superTypes:
@@ -46,34 +58,30 @@
       '*': false
       'Sfi.News:News': true
 
-'Sfi.News:News':
+'Sfi.News:AbstractNews':
+  abstract: TRUE
   superTypes:
     - 'TYPO3.Neos:Document'
   constraints:
     nodeTypes:
       '*': false
   childNodes:
-    coverPhoto:
-      type: 'TYPO3.Neos.NodeTypes:Image'
     main:
       type: 'TYPO3.Neos:ContentCollection'
-    gallery:
-      type: 'Sfi.Widgets:Carousel'
+    coverPhoto:
+      type: 'TYPO3.Neos.NodeTypes:Image'
   ui:
-    label: News
+    label: 'News'
     icon: icon-file-text
     group: news
     inspector:
       groups:
         news:
-          label: News
+          label: 'News'
   properties:
     title:
-      validation: null
       ui:
         inlineEditable: true
-        inspector:
-          group: null
         aloha:
           placeholder: 'Enter title here'
           format:
@@ -93,9 +101,6 @@
           link:
             a: true
           alignment: {  }
-          formatlesspaste:
-            button: false
-            formatlessPasteOption: true
     teaser:
       type: string
       ui:
@@ -122,9 +127,6 @@
           link:
             a: true
           alignment: {  }
-          formatlesspaste:
-            button: false
-            formatlessPasteOption: true
       validation:
         TYPO3.Neos/Validation/StringLengthValidator:
           minimum: 1
@@ -137,12 +139,9 @@
           group: news
     author:
       type: string
-      validation: null
       ui:
         label: 'Author name'
         inlineEditable: true
-        inspector:
-          group: null
         aloha:
           placeholder: 'Enter news author here'
           format:
@@ -162,9 +161,6 @@
           link:
             a: true
           alignment: {  }
-          formatlesspaste:
-            button: false
-            formatlessPasteOption: true
     date:
       type: date
       defaultValue: 'now'
@@ -197,3 +193,39 @@
               - 'Sfi.News:Category'
     originalIdentifier:
       type: string
+
+'Sfi.News:News':
+  superTypes:
+    - 'Sfi.News:AbstractNews'
+  childNodes:
+    gallery:
+      type: 'Sfi.Widgets:Carousel'
+
+'Sfi.News:Announcement':
+  superTypes:
+    - 'Sfi.News:AbstractNews'
+  ui:
+    label: 'Announcement'
+  properties:
+    place:
+      ui:
+        inlineEditable: true
+        aloha:
+          placeholder: 'Enter announcement place here'
+          format:
+            b: false
+            i: false
+            u: false
+            sub: false
+            sup: false
+            p: false
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: false
+          alignment: {  }
