@@ -17,7 +17,7 @@ Sfi:
         maximumNumberOfLinks: 15
       sortProperty: date
       sortOrder: DESC
-      listTitle: 'Новости СФИ'
+      listTitle: 'СФИ сегодня'
       class: 'medium-block-grid-2 large-block-grid-3'
     newsShort:
       thumbnailWidth: 420
@@ -44,9 +44,9 @@ Sfi:
       numberOfItems: 1
       sortProperty: date
       sortOrder: DESC
-      listTitle: 'Жутко важное'
+      listTitle: ~
       class: ''
     topShort:
-      thumbnailWidth: 600
-      thumbnailHeight: 300
+      thumbnailWidth: 1200
+      thumbnailHeight: 600
       dateFormat: d.m
