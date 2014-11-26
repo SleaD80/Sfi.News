@@ -1,5 +1,6 @@
 #Display full view of article
 prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
+	@override.variant = ${q(node).property('variant') != 'Inherit' ? q(node).property('variant') : q(node).parent().property('variant')}
 	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
 	@override.configuration = ${Configuration.setting('Sfi.News.newsDetail')}
 	configuration = ${configuration}

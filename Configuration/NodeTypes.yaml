@@ -191,6 +191,24 @@
           editorOptions:
             nodeTypes:
               - 'Sfi.News:Category'
+    variant:
+      defaultValue: 'Simple'
+      type: string
+      defaultValue: 'Inherit'
+      ui:
+        label: 'News variant'
+        reloadIfChanged: false
+        inspector:
+          group: news
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              'Inherit':
+                label: 'Inherit'
+              'Simple':
+                label: 'Simple'
+              'Article':
+                label: 'Article'
     originalIdentifier:
       type: string
 
