@@ -7,7 +7,7 @@
 	</f:if>
 	<ul{attributes -> f:format.raw()} >
 		<f:for each="{newsCollection}" as="news">
-			<li class="NewsList-Item">
+			<li class="{itemClass} List-Item">
 				<ts:render path="newsItem" context="{node: news}" />
 			</li>
 		</f:for>

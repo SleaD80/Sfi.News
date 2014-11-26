@@ -107,6 +107,8 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:NewsList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
 
+	itemClass = ${configuration.itemClass}
+
 	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
 	newsItem>
 	newsItem = Sfi.News:TopShort
