@@ -78,6 +78,23 @@ prototype(Sfi.News:NewsList) < prototype(TYPO3.Neos:Content) {
 
 	#Public
 	newsItem = Sfi.News:NewsShort
+
+
+	@cache {
+		mode = 'cached'
+		maximumLifetime = '86400'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+			format = ${request.format}
+		}
+		entryTags {
+			# Whenever the node changes the matched condition could change
+			1 = ${'Node_' + documentNode.identifier}
+			# Whenever one of the parent nodes changes the layout could change
+			2 = ${'DescendantOf_' + documentNode.identifier}
+		}
+	}
 }
 
 
@@ -93,4 +110,20 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:NewsList) {
 	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
 	newsItem>
 	newsItem = Sfi.News:TopShort
+
+	@cache {
+		mode = 'cached'
+		maximumLifetime = '86400'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+			format = ${request.format}
+		}
+		entryTags {
+			# Whenever the node changes the matched condition could change
+			1 = ${'Node_' + documentNode.identifier}
+			# Whenever one of the parent nodes changes the layout could change
+			2 = ${'DescendantOf_' + documentNode.identifier}
+		}
+	}
 }
