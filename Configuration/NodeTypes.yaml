@@ -171,26 +171,16 @@
           group: news
       validation:
         TYPO3.Neos/Validation/DateTimeValidator: {  }
-    relatedNews:
-      type: references
-      ui:
-        label: 'Related news'
-        reloadIfChanged: true
-        inspector:
-          group: news
-          editorOptions:
-            nodeTypes:
-              - 'Sfi.News:News'
-    categories:
-      type: references
-      ui:
-        label: Categories
-        reloadIfChanged: true
-        inspector:
-          group: news
-          editorOptions:
-            nodeTypes:
-              - 'Sfi.News:Category'
+    # relatedNews:
+    #   type: references
+    #   ui:
+    #     label: 'Related news'
+    #     reloadIfChanged: true
+    #     inspector:
+    #       group: news
+    #       editorOptions:
+    #         nodeTypes:
+    #           - 'Sfi.News:News'
     variant:
       defaultValue: 'Simple'
       type: string

@@ -41,7 +41,7 @@ Sfi:
     announcementDetail:
       dateFormat: 'F jS, Y'
     topList:
-      numberOfItems: 1
+      numberOfItems: 4
       sortProperty: date
       sortOrder: DESC
       listTitle: ~
