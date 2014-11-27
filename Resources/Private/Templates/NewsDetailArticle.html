@@ -16,7 +16,11 @@
 						</div>
 						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
 						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
-						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
+						<div class="row">
+							<div class="medium-10 large-8 medium-offset-1 large-offset-2 columns">
+								<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="large-10 large-offset-1 columns">
 								<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
