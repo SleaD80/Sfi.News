@@ -6,10 +6,6 @@
 		<h2 class="SectionDivider--Service">{listTitle}</h2>
 	</f:if>
 	<ul{attributes -> f:format.raw()} >
-		<f:for each="{newsCollection}" as="news">
-			<li class="{itemClass} List-Item">
-				<ts:render path="newsItem" context="{node: news}" />
-			</li>
-		</f:for>
+		{newsCollection -> f:format.raw()}
 	</ul>
 </f:if>

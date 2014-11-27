@@ -25,8 +25,11 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	category = ${q(node).parent().get(0)}
 
 	#####
+	@override.parentNodeName = ${q(node).property('_name')}
 	moreNews = Sfi.News:NewsList{
 		attributes.class = 'NewsList'
+		# Filter out the parent article
+		newsCollection.collection = ${q(site).find('[instanceof Sfi.News:News]').filter('[_name != ' + parentNodeName + ']').get()}
 	}
 
 
@@ -67,19 +70,17 @@ prototype(Sfi.News:NewsList) < prototype(TYPO3.Neos:Content) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	configuration = ${configuration}
 
-	#Public
-	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
-	#sort
-	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
-	#limit
-	newsCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+	newsCollection = Sfi.Widgets:ContentCollection {
+		collection = ${q(site).find('[instanceof Sfi.News:News]').get()}
+		#sort
+		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
+		#limit
+		collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+		itemRenderer = Sfi.News:NewsShort
+	}
 	#This object will be used to render news articles
 	listTitle = ${configuration.listTitle}
 	attributes.class = ${configuration.class}
-
-	#Public
-	newsItem = Sfi.News:NewsShort
-
 
 	@cache {
 		mode = 'cached'
@@ -108,11 +109,10 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:NewsList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
 
-	itemClass = ${configuration.itemClass}
-
-	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
-	newsItem>
-	newsItem = Sfi.News:TopShort
+	newsCollection = Sfi.Widgets:ContentCollection {
+		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
+		itemRenderer = Sfi.News:TopShort
+	}
 
 	@cache {
 		mode = 'cached'

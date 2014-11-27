@@ -21,8 +21,8 @@ prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:NewsList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementsList')}
 
-	#Find all nodes of type News
-	newsCollection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
-	#This object will be used to render news articles
-	newsItem = Sfi.News:AnnouncementShort
+	newsCollection = Sfi.Widgets:ContentCollection {
+		collection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
+		itemRenderer = Sfi.News:AnnouncementShort
+	}
 }
