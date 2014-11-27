@@ -127,6 +127,32 @@
           link:
             a: true
           alignment: {  }
+    lead:
+      type: string
+      ui:
+        label: 'Lead text'
+        inlineEditable: true
+        inspector:
+          group: null
+        aloha:
+          placeholder: 'Enter Lead text here'
+          format:
+            b: true
+            i: true
+            u: false
+            sub: false
+            sup: false
+            p: true
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: false
+          alignment: {  }
       validation:
         TYPO3.Neos/Validation/StringLengthValidator:
           minimum: 1

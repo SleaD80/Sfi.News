@@ -7,6 +7,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 
 	title = ${q(node).property('title')}
 	teaser = ${q(node).property('teaser')}
+	lead = ${q(node).property('lead')}
 	author = ${q(node).property('author')}
 	date = ${q(node).property('date')}
 

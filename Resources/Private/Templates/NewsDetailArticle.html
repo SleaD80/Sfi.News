@@ -10,12 +10,13 @@
 				<div class="Article">
 					<neos:contentElement.wrap node="{node}">
 						<div class="Article-Category">{category.properties.title -> f:format.raw()}</div>
-						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
 						<div class="Article-Bar overflow-hidden">
 							<div class="Article-Date float-left"><f:format.date format="{configuration.dateFormat}">{date}</f:format.date></div>
 							<div class="Article-Author float-right">{neos:contentElement.editable(property: 'author')}</div>
 						</div>
+						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
 						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
+						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
 						<div class="row">
 							<div class="large-10 large-offset-1 columns">
 								<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
@@ -23,7 +24,7 @@
 						</div>
 						<div class="row">
 							<div class="large-8 large-offset-2 columns">
-								<div class="Article-Content">{main -> f:format.raw()}</div>
+								<div class="Article-Content StyleSet-ModernGrand">{main -> f:format.raw()}</div>
 							</div>
 						</div>
 						<div class="row">
