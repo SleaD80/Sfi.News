@@ -18,7 +18,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: 'Все материалы'
-      class: 'medium-block-grid-3 large-block-grid-4'
+      class: 'medium-block-grid-4 large-block-grid-4'
     newsLatest:
       numberOfItems: 4
       pagination:
@@ -27,7 +27,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: 'СФИ сегодня'
-      class: 'medium-block-grid-3 large-block-grid-4'
+      class: 'medium-block-grid-4 large-block-grid-4'
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
@@ -54,7 +54,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: ~
-      class: 'medium-block-grid-3 large-block-grid-3'
+      class: 'medium-block-grid-2 large-block-grid-4'
     topShort:
       thumbnailWidth: 1200
       thumbnailHeight: 600
