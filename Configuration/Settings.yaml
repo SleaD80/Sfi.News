@@ -11,7 +11,16 @@ TYPO3:
 Sfi:
   News:
     newsList:
-      numberOfItems: 6
+      numberOfItems: 28
+      pagination:
+        itemsPerPage: 10
+        maximumNumberOfLinks: 15
+      sortProperty: date
+      sortOrder: DESC
+      listTitle: 'Все материалы'
+      class: 'medium-block-grid-3 large-block-grid-4'
+    newsLatest:
+      numberOfItems: 4
       pagination:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
