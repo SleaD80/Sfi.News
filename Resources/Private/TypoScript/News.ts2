@@ -70,12 +70,15 @@ prototype(Sfi.News:NewsList) < prototype(TYPO3.Neos:Content) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	configuration = ${configuration}
 
+	@override.filterByTag = ${request.arguments.tag}
 	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(site).find('[instanceof Sfi.News:News]').get()}
-		#sort
+		collection = ${q(site).find('[instanceof Sfi.News:News]').filter('[important = FALSE]').get()}
+		# sort
 		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
-		#limit
+		# limit
 		collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+		# filterByTag
+		collection.@process.filterByTag = ${filterByTag != null ? q(value).filter('[tags *= ' + filterByTag + ']').get() : value}
 		itemRenderer = Sfi.News:NewsShort
 	}
 	#This object will be used to render news articles

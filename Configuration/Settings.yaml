@@ -18,8 +18,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: 'СФИ сегодня'
-      class: 'medium-block-grid-2 large-block-grid-3'
-      itemClass: ''
+      class: 'medium-block-grid-3 large-block-grid-4'
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
@@ -35,7 +34,6 @@ Sfi:
       sortOrder: DESC
       listTitle: 'Анонсы'
       class: 'medium-block-grid-2 large-block-grid-3'
-      itemClass: ''
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
@@ -47,8 +45,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: ~
-      class: 'Carousel js-carousel-1x'
-      itemClass: 'Carousel-Item'
+      class: 'medium-block-grid-3 large-block-grid-3'
     topShort:
       thumbnailWidth: 1200
       thumbnailHeight: 600

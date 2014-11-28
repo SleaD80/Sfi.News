@@ -5,6 +5,7 @@
 	<f:if condition="{listTitle}">
 		<h2 class="SectionDivider--Service">{listTitle}</h2>
 	</f:if>
+	
 	<ul{attributes -> f:format.raw()} >
 		{newsCollection -> f:format.raw()}
 	</ul>

@@ -1,7 +1,7 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace m=TYPO3\Media\ViewHelpers}
-<div class="MediaSlide">
+<li class="MediaSlide">
 	<neos:link.node node="{node}">
 		<div class="MediaSlide-Image">
 			<f:if condition="{thumbnailImage.properties.image}">
@@ -18,4 +18,4 @@
 			<div class="MediaSlide-Teaser">{teaser -> f:format.raw()}</div>
 		</div>
 	</neos:link.node>
-</div>
+</li>
