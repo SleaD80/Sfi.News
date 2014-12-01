@@ -279,21 +279,21 @@
         label: 'Has video?'
         reloadIfChanged: TRUE
         inspector:
-          group: 'variant'
+          group: 'news'
     hasPhoto:
       type: boolean
       ui:
         label: 'Has photo?'
         reloadIfChanged: TRUE
         inspector:
-          group: 'variant'
+          group: 'news'
     hasAudio:
       type: boolean
       ui:
         label: 'Has audio?'
         reloadIfChanged: TRUE
         inspector:
-          group: 'variant'
+          group: 'news'
 
 'Sfi.News:Announcement':
   superTypes:
