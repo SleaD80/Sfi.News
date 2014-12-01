@@ -23,8 +23,12 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 		attributes.class = 'Carousel js-carousel-2x'
 	}
 
-	main = TYPO3.Neos:ContentCollection
-	main.nodePath = 'main'	
+	main = TYPO3.Neos:ContentCollection{
+		nodePath = 'main'
+	}
+	assets = TYPO3.Neos:ContentCollection{
+		nodePath = 'assets'
+	}
 
 	category = ${q(node).parent().get(0)}
 

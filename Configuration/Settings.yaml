@@ -19,7 +19,7 @@ Sfi:
       listTitle: 'Все материалы'
       class: 'medium-block-grid-4 large-block-grid-4'
     newsLatest:
-      numberOfItems: 4
+      numberOfItems: 8
       pagination:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
@@ -55,7 +55,7 @@ Sfi:
       numberOfItems: 4
       sortProperty: date
       listTitle: ~
-      class: 'Carousel js-carousel-1x'
+      class: 'Carousel js-carousel-2x'
     topShort:
       thumbnailWidth: 1200
       thumbnailHeight: 600
