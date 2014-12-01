@@ -19,14 +19,17 @@
 						<div class="row">
 							<div class="large-10 large-offset-1 columns">
 								<div class="Article-Bar overflow-hidden">
-									<div class="Article-Date float-left"><f:format.date format="{configuration.dateFormat}">{date}</f:format.date></div>
+									<div class="Article-Date float-left">
+										<f:format.date format="{configuration.dateFormat}">{date}</f:format.date>
+									</div>
 									<div class="Article-Author float-right">
-									<f:if condition="{author}">
-										<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
-									</f:if>
-									<f:if condition="{authorPhoto}">
-										<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span></div>
-									</f:if>
+										<f:if condition="{author}">
+											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+										</f:if>
+										<f:if condition="{authorPhoto}">
+											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+										</f:if>
+									</div>
 								</div>
 							</div>
 						</div>
