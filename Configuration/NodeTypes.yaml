@@ -51,7 +51,7 @@
       type: 'TYPO3.Neos:ContentCollection'
   properties:
     variant:
-      defaultValue: 'Simple'
+      defaultValue: 'Hard'
       type: string
       ui:
         label: 'News variant'
@@ -61,10 +61,10 @@
           editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
           editorOptions:
             values:
-              'Simple':
-                label: 'Simple'
-              'Article':
-                label: 'Article'
+              'Hard':
+                label: 'Hard'
+              'Soft':
+                label: 'Soft'
   constraints:
     nodeTypes:
       '*': false
@@ -83,6 +83,10 @@
       type: 'TYPO3.Neos:ContentCollection'
     coverPhoto:
       type: 'TYPO3.Neos.NodeTypes:Image'
+    gallery:
+      type: 'Sfi.Widgets:Carousel'
+    assets:
+      type: 'TYPO3.Neos:ContentCollection'
   ui:
     label: 'News'
     icon: icon-file-text
@@ -200,6 +204,30 @@
           link:
             a: true
           alignment: {  }
+    authorPhoto:
+      type: string
+      ui:
+        label: 'Author of photos'
+        inlineEditable: true
+        aloha:
+          placeholder: 'Author of photos'
+          format:
+            b: false
+            i: false
+            u: false
+            sub: false
+            sup: false
+            p: false
+            h1: false
+            h2: false
+            h3: false
+            pre: false
+            removeFormat: false
+          table: {  }
+          list: {  }
+          link:
+            a: true
+          alignment: {  }
     date:
       type: date
       defaultValue: 'now'
@@ -221,7 +249,7 @@
     #         nodeTypes:
     #           - 'Sfi.News:News'
     variant:
-      defaultValue: 'Simple'
+      defaultValue: 'Hard'
       type: string
       defaultValue: 'Inherit'
       ui:
@@ -234,19 +262,38 @@
             values:
               'Inherit':
                 label: 'Inherit'
-              'Simple':
-                label: 'Simple'
-              'Article':
-                label: 'Article'
+              'Hard':
+                label: 'Hard'
+              'Soft':
+                label: 'Soft'
     originalIdentifier:
       type: string
 
 'Sfi.News:News':
   superTypes:
     - 'Sfi.News:AbstractNews'
-  childNodes:
-    gallery:
-      type: 'Sfi.Widgets:Carousel'
+  properties:
+    hasVideo:
+      type: boolean
+      ui:
+        label: 'Has video?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'variant'
+    hasPhoto:
+      type: boolean
+      ui:
+        label: 'Has photo?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'variant'
+    hasAudio:
+      type: boolean
+      ui:
+        label: 'Has audio?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'variant'
 
 'Sfi.News:Announcement':
   superTypes:

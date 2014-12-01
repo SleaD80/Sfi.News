@@ -10,11 +10,11 @@
 				</f:if>
 			</div>
 			<div class="Media-Body">
+				<f:if condition="{date}">
+					<div class="Media-Date"><f:format.date format="{configuration.dateFormat}">{date}</f:format.date></div>
+				</f:if>
 				<h3 class="Media-Title">
-						<f:if condition="{date}">
-							<span class="Media-Date"><f:format.date format="{configuration.dateFormat}">{date}</f:format.date></span>
-						</f:if>
-						{title}
+					{title}
 				</h3>
 				<div class="Media-Teaser">{teaser -> f:format.raw()}</div>
 			</div>

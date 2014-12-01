@@ -31,7 +31,7 @@ Sfi:
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: d.m
+      dateFormat: 'F jS'
     newsDetail:
       dateFormat: 'F jS, Y'
     announcementsList:
@@ -42,11 +42,11 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: 'Анонсы'
-      class: 'medium-block-grid-2 large-block-grid-3'
+      class: ''
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: d.m
+      dateFormat: 'F jS, Y G:i'
     announcementDetail:
       dateFormat: 'F jS, Y'
     topList:
@@ -54,7 +54,7 @@ Sfi:
       sortProperty: date
       sortOrder: DESC
       listTitle: ~
-      class: 'medium-block-grid-2 large-block-grid-4'
+      class: 'Carousel js-carousel-1x'
     topShort:
       thumbnailWidth: 1200
       thumbnailHeight: 600

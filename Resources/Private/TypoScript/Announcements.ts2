@@ -13,12 +13,11 @@ prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
 prototype(Sfi.News:AnnouncementShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementShort')}
-
-	place = ${q(node).property('place')}
+	place = ${String.stripTags(q(node).property('place'))}
 }
 
-prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:NewsList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
+prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementsList.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementsList')}
 
 	newsCollection = Sfi.Widgets:ContentCollection {
