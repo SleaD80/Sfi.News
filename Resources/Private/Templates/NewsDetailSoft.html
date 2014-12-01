@@ -23,12 +23,22 @@
 										<f:format.date format="{configuration.dateFormat}">{date}</f:format.date>
 									</div>
 									<div class="Article-Author float-right">
-										<f:if condition="{author}">
-											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
-										</f:if>
-										<f:if condition="{authorPhoto}">
-											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
-										</f:if>
+										<f:security.ifAccess resource="TYPO3_Neos_Backend_GeneralAccess">
+											<f:if condition="{node.context.workspace.name} != 'live'">
+												<f:then>
+													<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+													<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+												</f:then>
+												<f:else>
+													<f:if condition="{author}">
+														<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+													</f:if>
+													<f:if condition="{authorPhoto}">
+														<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+													</f:if>
+												</f:else>
+											</f:if>
+										</f:security.ifAccess>
 									</div>
 								</div>
 							</div>
