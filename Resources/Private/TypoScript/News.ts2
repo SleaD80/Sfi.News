@@ -14,6 +14,9 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 
 	coverPhoto = TYPO3.Neos.NodeTypes:Image{
 		@override.node = ${q(node).children('coverPhoto').get(0)}
+		maximumWidth = 980
+		maximumHeight = 490
+		allowCropping = TRUE
 	}
 	gallery = Sfi.Widgets:Carousel{
 		content.collection = ${q(node).children('gallery').children()}
@@ -27,8 +30,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 
 	#####
 	@override.parentNodeName = ${q(node).property('_name')}
-	moreNews = Sfi.News:NewsList{
-		attributes.class = 'NewsList'
+	moreNews = Sfi.News:NewsRelated{
 		# Filter out the parent article
 		newsCollection.collection = ${q(site).find('[instanceof Sfi.News:News]').filter('[_name != ' + parentNodeName + ']').get()}
 	}
@@ -73,7 +75,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 	newsCollection = Sfi.Widgets:ContentCollection {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 		# sort
-		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
+		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, 'DESC').get() : value}
 		# limit
 		collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
 		# filterByTag
@@ -111,22 +113,6 @@ prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(site).find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
 		itemRenderer = Sfi.News:NewsShort
 	}
-
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
-	}
 }
 
 # List all articles, defined be category, paginated
@@ -138,23 +124,19 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
 		itemRenderer = Sfi.News:NewsShort
 	}
+}
 
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
+prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
+
+	newsCollection = Sfi.Widgets:ContentCollection {
+		collection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
+		itemRenderer = Sfi.News:NewsShort
 	}
 }
+
+
 
 prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
@@ -168,21 +150,5 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	newsCollection = Sfi.Widgets:ContentCollection {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
 		itemRenderer = Sfi.News:TopShort
-	}
-
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
 	}
 }

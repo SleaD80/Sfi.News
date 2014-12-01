@@ -16,7 +16,6 @@ Sfi:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
       sortProperty: date
-      sortOrder: DESC
       listTitle: 'Все материалы'
       class: 'medium-block-grid-4 large-block-grid-4'
     newsLatest:
@@ -25,9 +24,13 @@ Sfi:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
       sortProperty: date
-      sortOrder: DESC
       listTitle: 'СФИ сегодня'
       class: 'medium-block-grid-4 large-block-grid-4'
+    newsRelated:
+      numberOfItems: 5
+      sortProperty: date
+      listTitle: 'Новости СФИ'
+      class: ''
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
@@ -40,7 +43,6 @@ Sfi:
         itemsPerPage: 10
         maximumNumberOfLinks: 15
       sortProperty: date
-      sortOrder: DESC
       listTitle: 'Анонсы'
       class: ''
     announcementShort:
@@ -52,7 +54,6 @@ Sfi:
     topList:
       numberOfItems: 4
       sortProperty: date
-      sortOrder: DESC
       listTitle: ~
       class: 'Carousel js-carousel-1x'
     topShort:

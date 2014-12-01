@@ -10,13 +10,32 @@
 				<div class="Article">
 					<neos:contentElement.wrap node="{node}">
 						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
+						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
+						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
 						<div class="Article-Bar overflow-hidden">
 							<div class="Article-Date float-left"><f:format.date format="{configuration.dateFormat}">{date}</f:format.date></div>
-							<div class="Article-Author float-right">{neos:contentElement.editable(property: 'author')}</div>
+							<div class="Article-Author float-right">
+								<f:security.ifAccess resource="TYPO3_Neos_Backend_GeneralAccess">
+									<f:if condition="{node.context.workspace.name} != 'live'">
+										<f:then>
+											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+										</f:then>
+										<f:else>
+											<f:if condition="{author}">
+												<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+											</f:if>
+											<f:if condition="{authorPhoto}">
+												<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+											</f:if>
+										</f:else>
+									</f:if>
+								</f:security.ifAccess>
+							</div>
 						</div>
-						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
+						
 						<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
-						<div class="Article-Content">{main -> f:format.raw()}</div>
+						<div class="Article-Content StyleSet-ModernModest">{main -> f:format.raw()}</div>
 						<f:if condition="{gallery}">
 							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
 						</f:if>
