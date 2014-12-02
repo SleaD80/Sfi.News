@@ -48,7 +48,7 @@ Sfi:
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'j F, Y G:i'
+      dateFormat: 'j F, Y'
     announcementDetail:
       dateFormat: 'j F, Y'
     topList:
