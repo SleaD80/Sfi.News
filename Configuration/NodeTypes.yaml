@@ -81,8 +81,8 @@
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
-    coverPhoto:
-      type: 'TYPO3.Neos.NodeTypes:Image'
+    coverCollection:
+      type: 'TYPO3.Neos:ContentCollection'
     gallery:
       type: 'Sfi.Widgets:Carousel'
     assets:

@@ -57,6 +57,6 @@ Sfi:
       listTitle: ~
       class: 'Carousel js-carousel-2x'
     topShort:
-      thumbnailWidth: 1200
-      thumbnailHeight: 600
+      thumbnailWidth: 600
+      thumbnailHeight: 400
       dateFormat: d.m
