@@ -1,6 +1,7 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace m=TYPO3\Media\ViewHelpers}
+{namespace w=Sfi\Widgets\ViewHelpers}
 
 <div class="row">
 	<div class="columns">
@@ -20,7 +21,7 @@
 							<div class="large-10 large-offset-1 columns">
 								<div class="Article-Bar overflow-hidden">
 									<div class="Article-Date float-left">
-										<f:format.date format="{configuration.dateFormat}">{date}</f:format.date>
+										<w:date format="{configuration.dateFormat}">{date}</w:date>
 									</div>
 									<div class="Article-Author float-right">
 										<f:security.ifAccess resource="TYPO3_Neos_Backend_GeneralAccess">

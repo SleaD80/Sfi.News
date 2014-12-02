@@ -34,9 +34,9 @@ Sfi:
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'F jS'
+      dateFormat: 'j F'
     newsDetail:
-      dateFormat: 'F jS, Y'
+      dateFormat: 'j F, Y'
     announcementsList:
       numberOfItems: 6
       pagination:
@@ -48,9 +48,9 @@ Sfi:
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'F jS, Y G:i'
+      dateFormat: 'j F, Y G:i'
     announcementDetail:
-      dateFormat: 'F jS, Y'
+      dateFormat: 'j F, Y'
     topList:
       numberOfItems: 4
       sortProperty: date
