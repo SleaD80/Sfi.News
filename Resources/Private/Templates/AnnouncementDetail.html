@@ -19,8 +19,8 @@
 								<span class="Article-Place">{neos:contentElement.editable(property: 'place')}</span>
 							</div>
 						</div>
-						<f:if condition="{coverPhoto}">
-							<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+						<f:if condition="{coverCollection}">
+							<div class="Article-CoverPhoto">{coverCollection -> f:format.raw()}</div>
 						</f:if>
 						<div class="Article-Content StyleSet-ModernModest">{main -> f:format.raw()}</div>
 					</neos:contentElement.wrap>

@@ -46,7 +46,12 @@
 						</div>
 						<div class="row">
 							<div class="large-10 large-offset-1 columns">
-								<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+								<f:if condition="{coverCollection}">
+						        	<div class="Article-CoverPhoto">{coverCollection -> f:format.raw()}</div>
+						    	</f:if>
+								<f:if condition="{coverPhoto}">
+								    <div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+								</f:if>
 							</div>
 						</div>
 						<div class="row">
