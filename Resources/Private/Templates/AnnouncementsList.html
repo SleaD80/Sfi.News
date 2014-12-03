@@ -11,6 +11,11 @@
 	</f:if>
 	
 	<ul{attributes -> f:format.raw()} >
-		{newsCollection -> f:format.raw()}
+		<f:for each="{newsCollection}" as="news">
+			<ts:render path="itemRenderer" context="{node: news, inputConfiguration: configuration}" />
+		</f:for>
 	</ul>
+	<f:if condition="{configuration.archiveLink}">
+		<neos:link.node node="{configuration.archiveLink}" class="Button">Еще новости</neos:link.node>
+	</f:if>
 </f:if>

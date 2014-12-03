@@ -5,24 +5,29 @@
 
 <div class="row">
 	<div class="columns">
-		<div class="AnnouncementDetail row">
-			<div class="AnnouncementDetail-Article medium-8 columns">
+		<div class="NewsDetail row">
+			<div class="NewsDetail-Article NewsDetail-Article--Hard medium-8 columns">
 				
 				<div class="Article">
 					<neos:contentElement.wrap node="{node}">
 						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
+						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
+						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
 						<div class="Article-Bar overflow-hidden">
 							<div class="Article-Date float-left"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
-							<div class="Article-Place float-right">{neos:contentElement.editable(property: 'place')}</div>
+							<div class="Article-Place float-left">
+								<span class="Article-Place">{neos:contentElement.editable(property: 'place')}</span>
+							</div>
 						</div>
-						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
-						<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
-						<div class="Article-Content">{main -> f:format.raw()}</div>
+						<f:if condition="{coverPhoto}">
+							<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+						</f:if>
+						<div class="Article-Content StyleSet-ModernModest">{main -> f:format.raw()}</div>
 					</neos:contentElement.wrap>
 				</div>
 
 			</div>
-			<div class="AnnouncementDetail-MoreNews medium-4 large-3 large-offset-1 columns">
+			<div class="NewsDetail-MoreNews medium-4 large-3 large-offset-1 columns">
 				{moreNews -> f:format.raw()}
 			</div>
 		</div>	

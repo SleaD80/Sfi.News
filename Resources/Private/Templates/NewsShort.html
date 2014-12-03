@@ -7,8 +7,10 @@
 	<div class="Media">
 		<neos:link.node node="{node}">
 			<div class="Media-Image">
-				<f:if condition="{thumbnailImage.properties.image}">
-					<m:image asset="{thumbnailImage.properties.image}" maximumWidth="{configuration.thumbnailWidth}" maximumHeight="{configuration.thumbnailHeight}" allowCropping="true" allowUpScaling="true" alt="{thumbnailImage.properties.alternativeText}" />    
+				<f:if condition="{thumbnailImage}">
+					<f:if condition="{thumbnailImage.properties.image}">
+						<m:image asset="{thumbnailImage.properties.image}" maximumWidth="{configuration.thumbnailWidth}" maximumHeight="{configuration.thumbnailHeight}" allowCropping="true" allowUpScaling="true" alt="{thumbnailImage.properties.alternativeText}" />    
+					</f:if>
 				</f:if>
 			</div>
 			<div class="Media-Body">

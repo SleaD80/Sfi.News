@@ -1,6 +1,7 @@
 prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
 	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementDetail.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementDetail')}
+	configuration = ${configuration}
 
 	place = ${q(node).property('place')}
 
@@ -13,15 +14,16 @@ prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
 prototype(Sfi.News:AnnouncementShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementShort')}
+	configuration = ${configuration}
+
 	place = ${String.stripTags(q(node).property('place'))}
 }
 
 prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementsList.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementsList')}
+	configuration = ${configuration}
 
-	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
-		itemRenderer = Sfi.News:AnnouncementShort
-	}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
+	itemRenderer = Sfi.News:AnnouncementShort
 }

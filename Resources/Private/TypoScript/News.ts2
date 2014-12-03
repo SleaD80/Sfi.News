@@ -76,16 +76,15 @@ prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 # Abstract List object
 prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 	@override.filterByTag = ${request.arguments.tag}
-	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
-		# sort
-		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, 'DESC').get() : value}
-		# limit
-		collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
-		# filterByTag
-		collection.@process.filterByTag = ${filterByTag != null ? q(value).filter('[tags *= ' + filterByTag + ']').get() : value}
-		itemRenderer = Sfi.News:NewsShort
-	}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+	# sort
+	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, 'DESC').get() : value}
+	# limit
+	newsCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+	# filterByTag
+	newsCollection.@process.filterByTag = ${filterByTag != null ? q(value).filter('[tags *= ' + filterByTag + ']').get() : value}
+	itemRenderer = Sfi.News:NewsShort
+
 	listTitle = ${configuration.listTitle}
 	attributes.class = ${configuration.class}
 
@@ -96,6 +95,8 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
 			format = ${request.format}
+			# TODO: find out why this doesn't work
+			pagination = ${request.pluginArguments.news.currentPage}
 		}
 		entryTags {
 			# Whenever the node changes the matched condition could change
@@ -112,32 +113,34 @@ prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
 	configuration = ${configuration}
 
-	newsCollection = Sfi.Widgets:ContentCollection {
-		#only show not important news
-		collection = ${q(site).find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
-		itemRenderer = Sfi.News:NewsShort
-	}
+	newsCollection = ${q(site).children('news').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
+	itemRenderer = Sfi.News:NewsShort
 }
 
 # List all articles, defined be category, paginated
 prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
-
-	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
-		itemRenderer = Sfi.News:NewsShort
+	configuration = ${configuration}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
+	itemRenderer = Sfi.News:NewsShort
+	@cache {
+		mode = 'uncached'
+			context {
+				1 = 'node'
+				2 = 'documentNode'
+				3 = 'site'
+			}
+		}
 	}
-}
 
 prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
+	configuration = ${configuration}
 
-	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
-		itemRenderer = Sfi.News:NewsShort
-	}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+	itemRenderer = Sfi.News:NewsShort
 }
 
 
@@ -145,14 +148,14 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
+	configuration = ${configuration}
 }
 
 prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
+	configuration = ${configuration}
 
-	newsCollection = Sfi.Widgets:ContentCollection {
-		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
-		itemRenderer = Sfi.News:TopShort
-	}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
+	itemRenderer = Sfi.News:TopShort
 }

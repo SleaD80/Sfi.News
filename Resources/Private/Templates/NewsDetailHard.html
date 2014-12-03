@@ -34,8 +34,9 @@
 								</f:security.ifAccess>
 							</div>
 						</div>
-						
-						<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+						<f:if condition="{coverPhoto}">
+							<div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
+						</f:if>
 						<div class="Article-Assets">{assets -> f:format.raw()}</div>
 						<div class="Article-Content StyleSet-ModernModest">{main -> f:format.raw()}</div>
 						<f:if condition="{gallery}">

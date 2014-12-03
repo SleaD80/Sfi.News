@@ -11,51 +11,52 @@ TYPO3:
 Sfi:
   News:
     newsList:
-      numberOfItems: 28
+      numberOfItems: 10000
       pagination:
-        itemsPerPage: 10
+        itemsPerPage: 24
         maximumNumberOfLinks: 15
       sortProperty: date
       listTitle: 'Все материалы'
       class: 'medium-block-grid-4 large-block-grid-4'
+      archiveLink: ''
     newsLatest:
       numberOfItems: 8
-      pagination:
-        itemsPerPage: 10
-        maximumNumberOfLinks: 15
+      pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
       class: 'medium-block-grid-4 large-block-grid-4'
+      archiveLink: '~/news'
     newsRelated:
       numberOfItems: 5
       sortProperty: date
       listTitle: 'Новости СФИ'
       class: ''
+      archiveLink: '~/news'
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'j F'
+      dateFormat: 'j F Y'
     newsDetail:
-      dateFormat: 'j F, Y'
+      dateFormat: 'j F Y'
     announcementsList:
       numberOfItems: 6
-      pagination:
-        itemsPerPage: 10
-        maximumNumberOfLinks: 15
+      pagination: ~
       sortProperty: date
       listTitle: 'Анонсы'
       class: ''
+      archiveLink: '~/anonsy'
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
-      dateFormat: 'j F, Y'
+      dateFormat: 'j F Y G:i'
     announcementDetail:
-      dateFormat: 'j F, Y'
+      dateFormat: 'j F Y G:i'
     topList:
       numberOfItems: 4
       sortProperty: date
       listTitle: ~
       class: 'Carousel js-carousel-2x'
+      archiveLink: ''
     topShort:
       thumbnailWidth: 600
       thumbnailHeight: 400
