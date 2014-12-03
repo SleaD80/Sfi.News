@@ -49,7 +49,7 @@
 								<f:if condition="{coverCollection}">
 						        	<div class="Article-CoverPhoto">{coverCollection -> f:format.raw()}</div>
 						    	</f:if>
-								<f:if condition="{coverPhoto}">
+								<f:if condition="{coverPhotoExists}">
 								    <div class="Article-CoverPhoto">{coverPhoto -> f:format.raw()}</div>
 								</f:if>
 							</div>

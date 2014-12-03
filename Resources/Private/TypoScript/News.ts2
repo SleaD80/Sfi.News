@@ -11,9 +11,10 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	author = ${q(node).property('author')}
 	authorPhoto = ${q(node).property('authorPhoto')}
 	date = ${q(node).property('date')}
-
+	# TODO: this is a real shit, fix it with @if someday
+	coverPhotoExists = ${q(node).children('coverPhoto').get(0) ? true : false}
 	coverPhoto = TYPO3.Neos.NodeTypes:Image{
-		@override.node = ${q(node).children('coverPhoto').get(0)}
+		@override.node = ${q(node).children('coverPhoto').get(0) ? q(node).children('coverPhoto').get(0) : null}
 		maximumWidth = 980
 		maximumHeight = 490
 		allowCropping = TRUE
