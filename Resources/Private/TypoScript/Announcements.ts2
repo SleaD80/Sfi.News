@@ -24,6 +24,6 @@ prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementsList')}
 	configuration = ${configuration}
 
-	newsCollection = ${q(site).find('[instanceof Sfi.News:Announcement]').get()}
+	newsCollection = ${q(site).children('announcements').find('[instanceof Sfi.News:Announcement]').get()}
 	itemRenderer = Sfi.News:AnnouncementShort
 }

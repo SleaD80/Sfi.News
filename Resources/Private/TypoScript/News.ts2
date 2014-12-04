@@ -11,14 +11,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	author = ${q(node).property('author')}
 	authorPhoto = ${q(node).property('authorPhoto')}
 	date = ${q(node).property('date')}
-	# TODO: this is a real shit, fix it with @if someday
-	coverPhotoExists = ${q(node).children('coverPhoto').get(0) ? true : false}
-	coverPhoto = TYPO3.Neos.NodeTypes:Image{
-		@override.node = ${q(node).children('coverPhoto').get(0) ? q(node).children('coverPhoto').get(0) : null}
-		maximumWidth = 980
-		maximumHeight = 490
-		allowCropping = TRUE
-	}
+
 	coverCollection = TYPO3.Neos:ContentCollection{
 		nodePath = 'coverCollection'
 		prototype(TYPO3.Neos.NodeTypes:Image){
@@ -76,7 +69,7 @@ prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 	date = ${q(node).property('date')}
 	teaser = ${String.stripTags(q(node).property('teaser'))}
 	# first image found becomes the thumbnail image TODO: remove legacy support for coverPhoto
-	thumbnailImage = ${q(node).children('coverCollection').children().count() > 0 ? q(node).children('coverCollection').children().get(0) : q(node).children('coverPhoto').get(0)}
+	thumbnailImage = ${q(node).children('coverCollection').children().count() > 0 ? q(node).children('coverCollection').children().get(0) : null}
 	#parrent node is the category
 	category = ${q(node).parent().get(0)}
 }
@@ -122,7 +115,7 @@ prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
 	configuration = ${configuration}
 
-	newsCollection = ${q(site).children('news').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
+	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
 	itemRenderer = Sfi.News:NewsShort
 }
 
@@ -131,7 +124,7 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	configuration = ${configuration}
-	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
+	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
 	itemRenderer = Sfi.News:NewsShort
 	@cache {
 		mode = 'uncached'

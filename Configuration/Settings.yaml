@@ -25,13 +25,13 @@ Sfi:
       sortProperty: date
       listTitle: 'СФИ сегодня'
       class: 'medium-block-grid-4 large-block-grid-4'
-      archiveLink: '~/news'
+      archiveLink: '~/sfi-today'
     newsRelated:
       numberOfItems: 5
       sortProperty: date
       listTitle: 'Новости СФИ'
       class: ''
-      archiveLink: '~/news'
+      archiveLink: '~/sfi-today'
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
@@ -44,7 +44,7 @@ Sfi:
       sortProperty: date
       listTitle: 'Анонсы'
       class: ''
-      archiveLink: '~/anonsy'
+      archiveLink: '~/announcements'
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
