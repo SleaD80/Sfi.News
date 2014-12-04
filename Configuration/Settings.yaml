@@ -52,7 +52,7 @@ Sfi:
     announcementDetail:
       dateFormat: 'j F Y G:i'
     topList:
-      numberOfItems: 4
+      numberOfItems: 6
       sortProperty: date
       listTitle: ~
       class: 'Carousel js-carousel-2x'
