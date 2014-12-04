@@ -43,10 +43,10 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 
 	#####
 	@override.parentNodeName = ${q(node).property('_name')}
-	# moreNews = Sfi.News:NewsRelated{
-	# 	# Filter out the parent article
-	# 	newsCollection = ${q(site).find('[instanceof Sfi.News:News]').filter('[_name != ' + parentNodeName + ']').get()}
-	# }
+	moreNews = Sfi.News:NewsRelated{
+		# Filter out the parent article
+		newsCollection = ${q(site).find('[instanceof Sfi.News:News]').filter('[_name != ' + parentNodeName + ']').get()}
+	}
 
 
 	@cache {
