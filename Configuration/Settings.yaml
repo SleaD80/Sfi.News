@@ -44,7 +44,7 @@ Sfi:
       sortProperty: date
       listTitle: 'Анонсы'
       class: ''
-      archiveLink: '~/announcements'
+      archiveLink: ''
     announcementShort:
       thumbnailWidth: 420
       thumbnailHeight: 222
