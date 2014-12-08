@@ -23,6 +23,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	gallery = Sfi.Widgets:Carousel{
 		content.collection = ${q(node).children('gallery').children()}
 		attributes.class = 'Carousel js-carousel-2x'
+		@if.1 = ${q(node).children('gallery').children().count() > 0}
 	}
 
 	main = TYPO3.Neos:ContentCollection{
@@ -97,8 +98,6 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
 			format = ${request.format}
-			# TODO: find out why this doesn't work
-			pagination = ${request.pluginArguments.news.currentPage}
 		}
 		entryTags {
 			# Whenever the node changes the matched condition could change
@@ -126,15 +125,17 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	configuration = ${configuration}
 	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
 	itemRenderer = Sfi.News:NewsShort
+	# TODO: find out why this doesn't work
+	# pagination = ${request.pluginArguments.news.currentPage}
 	@cache {
 		mode = 'uncached'
-			context {
-				1 = 'node'
-				2 = 'documentNode'
-				3 = 'site'
-			}
+		context {
+			1 = 'node'
+			2 = 'documentNode'
+			3 = 'site'
 		}
 	}
+}
 
 prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
