@@ -20,7 +20,7 @@ Sfi:
       class: 'medium-block-grid-4 large-block-grid-4'
       archiveLink: ''
     newsLatest:
-      numberOfItems: 8
+      numberOfItems: 4
       pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
