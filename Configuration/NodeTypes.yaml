@@ -237,8 +237,10 @@
         reloadIfChanged: true
         inspector:
           group: news
+          editorOptions:
+            format: 'd-m-Y H:i'
       validation:
-        TYPO3.Neos/Validation/DateTimeValidator: {  }
+        'TYPO3.Neos/Validation/DateTimeValidator': []
     # relatedNews:
     #   type: references
     #   ui:
