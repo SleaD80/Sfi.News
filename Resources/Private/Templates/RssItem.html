@@ -1,0 +1,24 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<item>
+    <guid>
+        <neos:uri.node node="{node}" />
+    </guid>
+    <pubDate>
+        <f:format.date format="r">{date}</f:format.date>
+    </pubDate>
+    <title>
+        {title}
+    </title>
+    <author>
+        {author}
+    </author>
+    <link>
+        <neos:uri.node node="{node}" />
+    </link>
+    <description>
+        {teaser}
+    </description>
+    <yandex:full-text>
+        {bodytext}
+    </yandex:full-text>
+</item>

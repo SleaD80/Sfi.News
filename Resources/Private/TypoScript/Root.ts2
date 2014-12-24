@@ -1,3 +1,4 @@
 include: News.ts2
 include: Announcements.ts2
+include: Rss.ts2
 include: PageObjects.ts2

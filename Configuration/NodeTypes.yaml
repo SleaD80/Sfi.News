@@ -34,6 +34,17 @@
   ui:
     label: 'Top list'
 
+'Sfi.News:Rss':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+  ui:
+    label: 'Rss list'
+    icon: icon-file
+    group: system
+  constraints:
+    nodeTypes:
+      '*': false
+
 'Sfi.News:Category':
   superTypes:
     - 'TYPO3.Neos:Document'

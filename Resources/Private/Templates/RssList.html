@@ -1,0 +1,21 @@
+{namespace ts=TYPO3\TypoScript\ViewHelpers}<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns="http://backend.userland.com/rss2" xmlns:yandex="http://news.yandex.ru">
+    <channel>
+        <title>Свято-Филаретовский православно-христианский институт</title>
+        <link>http://sfi.ru/</link>
+        <description>Новости Свято-Филаретовского института</description>
+        <language>ru_RU</language>
+        <image>
+            <title>Информационная служба СФИ</title>
+            <url>http://sfi.ru/_Resources/Static/Packages/Sfi.Sfi/Images/sfiLogoRss.gif</url>
+            <link>http://sfi.ru/</link>
+            <width>100</width>
+            <height>100</height>
+        </image>
+        <generator>TYPO3 Neos</generator>
+
+        <f:for each="{newsCollection}" as="news">
+            <ts:render path="itemRenderer" context="{node: news, inputConfiguration: configuration}" />
+        </f:for>
+    </channel>
+</rss>

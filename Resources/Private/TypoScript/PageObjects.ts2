@@ -19,9 +19,18 @@ categoryPage = Sfi.Sfi:Page {
 	}
 
 	body.content.main = ${'<div class="row"><div class="columns">' + newsList + '</div></div>'}
-	
 }
 root.categoryPage {
 	condition = ${q(node).is('[instanceof Sfi.News:Category]')}
 	renderPath = '/categoryPage'
+}
+
+# Redirects for RSS may be set in Routes.yaml
+rssPage = TYPO3.TypoScript:Http.Message {
+	httpResponseHead.headers.Content-Type = 'application/xml'
+	content = Sfi.News:RssList
+}
+root.rssPage {
+	condition = ${q(node).is('[instanceof Sfi.News:Rss]')}
+	renderPath = '/rssPage'
 }

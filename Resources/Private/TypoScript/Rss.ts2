@@ -1,0 +1,21 @@
+prototype(Sfi.News:RssList) < prototype(Sfi.News:AbstractList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/RssList.html'
+	@override.configuration = ${Configuration.setting('Sfi.News.rssList')}
+	configuration = ${configuration}
+#.filter('[important != TRUE]')
+	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').get()}
+	itemRenderer = Sfi.News:RssItem
+}
+
+prototype(Sfi.News:RssItem) < prototype(TYPO3.TypoScript:Template) {
+	templatePath = 'resource://Sfi.News/Private/Templates/RssItem.html'
+	node = ${node}
+	title = ${String.stripTags(q(node).property('title'))}
+	author = ${String.stripTags(q(node).property('author'))}
+	date = ${q(node).property('date')}
+	teaser = ${String.stripTags(q(node).property('teaser'))}
+	@override.main = TYPO3.Neos:ContentCollection{
+		nodePath = 'main'
+	}
+	bodytext = ${String.Trim(String.htmlSpecialChars(String.stripTags(main)))}
+}

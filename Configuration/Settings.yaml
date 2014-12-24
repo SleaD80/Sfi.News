@@ -61,3 +61,6 @@ Sfi:
       thumbnailWidth: 600
       thumbnailHeight: 400
       dateFormat: d.m
+    rssList:
+      numberOfItems: 50
+      sortProperty: date
