@@ -14,13 +14,13 @@
 				</f:if>
 			</div>
 			<div class="Media-Body">
-				<f:if condition="{date}">
-					<div class="Media-Date"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
-				</f:if>
 				<h3 class="Media-Title">
 					{title}
 				</h3>
 				<div class="Media-Teaser">{teaser -> f:format.raw()}</div>
+				<f:if condition="{date}">
+					<div class="Media-Date"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
+				</f:if>
 			</div>
 		</neos:link.node>
 	</div>

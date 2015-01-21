@@ -32,6 +32,9 @@ Sfi:
       listTitle: 'Новости СФИ'
       class: ''
       archiveLink: '~/sfi-today'
+      thumbnailWidth: 100
+      thumbnailHeight: 100
+      dateFormat: 'j F Y'
     newsShort:
       thumbnailWidth: 420
       thumbnailHeight: 222

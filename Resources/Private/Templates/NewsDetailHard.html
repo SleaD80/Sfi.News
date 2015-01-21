@@ -6,45 +6,61 @@
 <div class="row">
 	<div class="columns">
 		<div class="NewsDetail row">
-			<div class="NewsDetail-Article NewsDetail-Article--Hard medium-8 columns">
+			<div class="NewsDetail-Article NewsDetail-Article--Hard medium-7 columns">
 				
 				<div class="Article">
 					<neos:contentElement.wrap node="{node}">
-						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title')}</h1>
-						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
-						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
-						<div class="Article-Bar overflow-hidden">
-							<div class="Article-Date float-left"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
+						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title', tag: 'span')}</h1>
+						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
+						<div class="Article-Date show-for-small-only">
+							<w:date format="{configuration.dateFormat}">{date}</w:date>
+						</div>
+						<div class="Article-Lead">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
+						
+						<div class="Article-Bar show-for-medium-up overflow-hidden">
+							<div class="float-left">
+								<span class="Article-Date">
+									<w:date format="{configuration.dateFormat}">{date}</w:date>
+								</span>
+							</div>
 							<div class="Article-Author float-right">
 								<f:if condition="{node.context.workspace.name} != 'live'">
 									<f:then>
-										<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
-										<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+										<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span'>
+										<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
 									</f:then>
 									<f:else>
 										<f:if condition="{author}">
-											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author')}</span>
+											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
 										</f:if>
 										<f:if condition="{authorPhoto}">
-											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto')}</span>
+											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
 										</f:if>
 									</f:else>
 								</f:if>
 							</div>
 						</div>
+
 						<f:if condition="{coverCollection}">
 				        	<div class="Article-CoverPhoto">{coverCollection -> f:format.raw()}</div>
 				    	</f:if>
-						<div class="Article-Assets">{assets -> f:format.raw()}</div>
-						<div class="Article-Content StyleSet-ModernModest">{main -> f:format.raw()}</div>
-						<f:if condition="{gallery}">
-							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
-						</f:if>
+
+						<div class="Article-Content">{main -> f:format.raw()}</div>
+						<div class="Article-Author marginTop-double show-for-small-only">
+							<div>
+								<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
+							</div>
+							<div>
+								<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
+							</div>
+						</div>
+
+						<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
 					</neos:contentElement.wrap>
 				</div>
 
 			</div>
-			<div class="NewsDetail-MoreNews medium-4 large-3 large-offset-1 columns">
+			<div class="NewsDetail-MoreNews medium-4 medium-offset-1 columns">
 				{moreNews -> f:format.raw()}
 			</div>
 		</div>	

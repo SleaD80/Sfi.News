@@ -16,7 +16,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 		nodePath = 'coverCollection'
 		prototype(TYPO3.Neos.NodeTypes:Image){
 			maximumWidth = 980
-			maximumHeight = 490
+			maximumHeight = 653
 			allowCropping = TRUE
 		}
 	}
@@ -144,6 +144,10 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 
 	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 	itemRenderer = Sfi.News:NewsShort
+	prototype(Sfi.News:NewsShort) {
+		@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
+		templatePath = 'resource://Sfi.News/Private/Templates/NewsShortSmall.html'
+	}
 }
 
 

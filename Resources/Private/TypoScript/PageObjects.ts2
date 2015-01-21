@@ -5,8 +5,13 @@ root.announcementPage {
 	renderPath = '/announcementPage'
 }
 
-newsPage = Sfi.Sfi:Page
-newsPage.body.content.main = Sfi.News:NewsDetail
+newsPage = Sfi.Sfi:Page {
+	body {
+		content.main = Sfi.News:NewsDetail
+		breadcrumbMenu>
+	}
+}
+
 root.newsPage {
 	condition = ${q(node).is('[instanceof Sfi.News:News]')}
 	renderPath = '/newsPage'
