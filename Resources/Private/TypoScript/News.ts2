@@ -116,6 +116,7 @@ prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
 	configuration = ${configuration}
 
 	attributes.data-columns = true
+	attributes.class = ${configuration.class + ' row'}
 
 	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
 	itemRenderer = Sfi.News:NewsShort
