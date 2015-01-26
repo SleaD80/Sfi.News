@@ -3,21 +3,23 @@
 {namespace m=TYPO3\Media\ViewHelpers}
 {namespace w=Sfi\Widgets\ViewHelpers}
 
-<div class="MediaSlide">
-	<neos:link.node node="{node}">
-		<div class="MediaSlide-Image">
-			<f:if condition="{thumbnailImage.properties.image}">
-				<m:image asset="{thumbnailImage.properties.image}" maximumWidth="{configuration.thumbnailWidth}" maximumHeight="{configuration.thumbnailHeight}" allowCropping="true" allowUpScaling="true" alt="{thumbnailImage.properties.alternativeText}" />    
-			</f:if>
-		</div>
-		<div class="MediaSlide-Body">
-			<h3 class="MediaSlide-Title">
-					<f:if condition="{date} == 123">
-						<span class="MediaSlide-Date"><w:date format="{configuration.dateFormat}">{date}</w:date></span>
-					</f:if>
-					{title}
-			</h3>
-			<div class="MediaSlide-Teaser">{teaser -> f:format.raw()}</div>
-		</div>
-	</neos:link.node>
+<div class="MediaSlide Cover" >
+	<div class="Cover-Inner" style="background-image:url('{m:uri.image(asset:thumbnailImage.properties.image, maximumWidth: configuration.thumbnailWidth, maximumHeight: configuration.thumbnailHeight, allowCropping: true, allowUpScaling: true)}')">
+		<neos:link.node node="{node}">
+			<div class="row">
+				<div class="medium-8 large-6 columns">
+					<div class="MediaSlide-Body">
+						<h3 class="MediaSlide-Title">
+							<f:if condition="{date} == 123">
+								<span class="MediaSlide-Date"><w:date format="{configuration.dateFormat}">{date}</w:date></span>
+							</f:if>
+							{title}
+						</h3>
+						<div class="MediaSlide-Teaser">{teaser -> f:format.raw()}</div>
+					</div>
+				</div>
+			</div>
+		</neos:link.node>
+		
+	</div>
 </div>

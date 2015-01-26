@@ -90,6 +90,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 
 	listTitle = ${configuration.listTitle}
 	attributes.class = ${configuration.class}
+	wrapClass = ${configuration.wrapClass}
 
 	@cache {
 		mode = 'cached'
@@ -114,6 +115,8 @@ prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
 	configuration = ${configuration}
 
+	attributes.data-columns = true
+
 	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
 	itemRenderer = Sfi.News:NewsShort
 }
@@ -125,6 +128,8 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	configuration = ${configuration}
 	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
 	itemRenderer = Sfi.News:NewsShort
+
+	attributes.data-columns = true
 	# TODO: find out why this doesn't work
 	# pagination = ${request.pluginArguments.news.currentPage}
 	@cache {

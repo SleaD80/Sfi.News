@@ -49,7 +49,7 @@ class FilterByDateOperation extends AbstractOperation {
 	 * @param array $arguments the arguments for this operation.
 	 * First argument is property to filter by, must be DateTime. 
 	 * Second is Date operand, must be DateTime object. 
-	 * And third is compare operator: '<' or '>', '>' by default
+	 * And third is a compare operator: '<' or '>', '>' by default
 	 * @return mixed
 	 */
 	public function evaluate(FlowQuery $flowQuery, array $arguments) {

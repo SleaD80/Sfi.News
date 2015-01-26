@@ -16,20 +16,21 @@ Sfi:
         itemsPerPage: 24
         maximumNumberOfLinks: 15
       sortProperty: date
-      listTitle: 'Все материалы'
-      class: 'medium-block-grid-4 large-block-grid-4'
+      listTitle: 'СФИ сегодня'
+      class: 'NewsList-Grid'
       archiveLink: ''
     newsLatest:
-      numberOfItems: 4
+      numberOfItems: 6
       pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
-      class: 'medium-block-grid-4 large-block-grid-4'
+      class: 'NewsLatest-Grid'
+      wrapClass: 'NewsLatest'
       archiveLink: '~/sfi-today'
     newsRelated:
-      numberOfItems: 5
+      numberOfItems: 4
       sortProperty: date
-      listTitle: 'Новости СФИ'
+      listTitle: ''
       class: ''
       archiveLink: '~/sfi-today'
       thumbnailWidth: 100
@@ -55,14 +56,14 @@ Sfi:
     announcementDetail:
       dateFormat: 'j F Y G:i'
     topList:
-      numberOfItems: 6
+      numberOfItems: 1
       sortProperty: date
       listTitle: ~
-      class: 'Carousel js-carousel-2x'
+      class: 'Carousel--Cover'
       archiveLink: ''
     topShort:
-      thumbnailWidth: 600
-      thumbnailHeight: 400
+      thumbnailWidth: 1440
+      thumbnailHeight: 700
       dateFormat: d.m
     rssList:
       numberOfItems: 50
