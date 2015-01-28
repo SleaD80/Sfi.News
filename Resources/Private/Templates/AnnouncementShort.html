@@ -4,15 +4,27 @@
 {namespace w=Sfi\Widgets\ViewHelpers}
 
 <li class="List-Item">
-	<div class="MediaAnnouncement row">
+	<div class="MediaAnnouncement">
 		<neos:link.node node="{node}">
 			<f:if condition="{date}">
-				<div class="MediaAnnouncement-Date medium-offset-2 medium-3 columns">
-					<w:date format="{configuration.dateFormat}">{date}</w:date>
+				<div class="MediaAnnouncement-Date">
+					<div class="MediaAnnouncement-DateDay">
+						<w:date format="j">{date}</w:date>
+					</div>
+					<div class="MediaAnnouncement-DateMonth">
+						<w:date format="F">{date}</w:date>
+					</div>
+					<!-- Sorry -->
+					<f:if condition="{date -> w:date(format:'G:i')} != '0:00'">
+						<div class="MediaAnnouncement-DateTime">
+							<w:date format="G:i">{date}</w:date>
+						</div>
+					</f:if>
 				</div>
 			</f:if>
-			<div class="MediaAnnouncement-WrapText medium-5 columns end">
-				<h3 class="MediaAnnouncement-Title">{title}. {teaser}</h3>
+			<div class="MediaAnnouncement-WrapText">
+				<h3 class="MediaAnnouncement-Title">{title}</h3>
+				<p class="MediaAnnouncement-Teaser">{teaser}</p>
 				<div class="MediaAnnouncement-Place">{place -> f:format.raw()}</div>
 			</div>
 		</neos:link.node>
