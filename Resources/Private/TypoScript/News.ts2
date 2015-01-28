@@ -110,7 +110,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 }
 
 # Show latest news
-prototype(Sfi.News:NewsLatest) < prototype(Sfi.News:AbstractList) {
+prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
 	configuration = ${configuration}
