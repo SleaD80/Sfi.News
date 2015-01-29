@@ -36,10 +36,8 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	category = ${q(node).parent().get(0)}
 
 	#####
-	@override.parentNodeName = ${q(node).property('_name')}
-	moreNews = Sfi.News:NewsRelated{
-		# Filter out the parent article
-		newsCollection = ${q(site).find('[instanceof Sfi.News:News]').filter('[_name != ' + parentNodeName + ']').get()}
+	moreItems = Sfi.News:NewsRelated{
+		newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
 	}
 
 
@@ -148,7 +146,10 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
 	configuration = ${configuration}
 
-	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+	newsCollection.@process.filterOutSelf {
+		expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
+		@position = 'start'
+	}
 	itemRenderer = Sfi.News:NewsShort
 	prototype(Sfi.News:NewsShort) {
 		@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
