@@ -31,7 +31,7 @@
 									<div class="Article-Author float-right">
 										<f:if condition="{node.context.workspace.name} != 'live'">
 											<f:then>
-												<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span'>
+												<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
 												<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
 											</f:then>
 											<f:else>
