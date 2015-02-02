@@ -25,7 +25,7 @@ Sfi:
       sortProperty: date
       listTitle: 'СФИ сегодня'
       class: 'NewsLatest-Grid'
-      wrapClass: 'NewsLatest'
+      wrapClass: 'NewsLatest grid-container'
       archiveLink: '~/sfi-today'
     newsRelated:
       numberOfItems: 4
