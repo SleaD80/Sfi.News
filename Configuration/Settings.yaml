@@ -24,8 +24,8 @@ Sfi:
       pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
-      class: 'NewsLatest-Grid'
-      wrapClass: 'NewsLatest grid-container'
+      class: 'NewsLatest-Grid grid-block'
+      wrapClass: 'NewsLatest'
       archiveLink: '~/sfi-today'
     newsRelated:
       numberOfItems: 4
@@ -56,10 +56,10 @@ Sfi:
     announcementDetail:
       dateFormat: 'j F Y G:i'
     topList:
-      numberOfItems: 1
+      numberOfItems: 3
       sortProperty: date
       listTitle: ~
-      class: 'Carousel--Cover'
+      class: 'Carousel--Cover js-carousel-1x'
       archiveLink: ''
     topShort:
       thumbnailWidth: 1440
