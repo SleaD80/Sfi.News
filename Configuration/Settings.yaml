@@ -17,7 +17,7 @@ Sfi:
         maximumNumberOfLinks: 15
       sortProperty: date
       listTitle: 'СФИ сегодня'
-      class: 'NewsList-Grid'
+      class: 'NewsList-Grid grid-block'
       archiveLink: ''
     newsLatest:
       numberOfItems: 6

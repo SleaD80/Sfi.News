@@ -28,4 +28,20 @@ prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {
 	newsCollection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.Now()).get() : value}
 	
 	itemRenderer = Sfi.News:AnnouncementShort
+
+	@cache {
+		mode = 'cached'
+		maximumLifetime = '43200'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+			format = ${request.format}
+		}
+		entryTags {
+			# Whenever the node changes the matched condition could change
+			1 = ${'Node_' + documentNode.identifier}
+			# Whenever one of the parent nodes changes the layout could change
+			2 = ${'DescendantOf_' + documentNode.identifier}
+		}
+	}
 }
