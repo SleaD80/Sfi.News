@@ -19,11 +19,12 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 			maximumHeight = 653
 			allowCropping = TRUE
 		}
+		@if.notVideoOrBackend = ${(q(node).property('hasVideo') != true) || (node.context.workspace.name != 'live')}
 	}
 	gallery = Sfi.Widgets:Carousel{
 		content.collection = ${q(node).children('gallery').children()}
 		attributes.class = 'Carousel js-carousel-2x'
-		@if.1 = ${q(node).children('gallery').children().count() > 0}
+		@if.hassGallery = ${q(node).children('gallery').children().count() > 0}
 	}
 
 	main = TYPO3.Neos:ContentCollection{
