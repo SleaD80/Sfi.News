@@ -11,40 +11,17 @@
 				<div class="Article">
 					<neos:contentElement.wrap node="{node}">
 						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title', tag: 'span')}</h1>
-						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
-						<div class="Article-Date show-for-small-only textAlign-center">
-							<w:date format="{configuration.dateFormat}">{date}</w:date>
+						<div class="grid-block">
+							<div class="large-10 large-offset-1 grid-content">
+								<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
+								<div class="Article-Date">
+									<w:date format="{configuration.dateFormat}">{date}</w:date>
+								</div>
+							</div>
 						</div>
 						<div class="grid-block">
 							<div class="medium-10 large-8 medium-offset-1 large-offset-2 grid-content">
 								<div class="Article-Lead">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
-							</div>
-						</div>
-						<div class="grid-block">
-							<div class="large-10 large-offset-1 grid-content">
-								<div class="Article-Bar show-for-medium-up overflow-hidden">
-									<div class="float-left">
-										<span class="Article-Date">
-											<w:date format="{configuration.dateFormat}">{date}</w:date>
-										</span>
-									</div>
-									<div class="Article-Author float-right">
-										<f:if condition="{node.context.workspace.name} != 'live'">
-											<f:then>
-												<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
-												<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
-											</f:then>
-											<f:else>
-												<f:if condition="{author}">
-													<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
-												</f:if>
-												<f:if condition="{authorPhoto}">
-													<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
-												</f:if>
-											</f:else>
-										</f:if>
-									</div>
-								</div>
 							</div>
 						</div>
 						<div class="grid-block">
@@ -57,13 +34,21 @@
 						<div class="grid-block">
 							<div class="large-8 large-offset-2 grid-content">
 								<div class="Article-Content">{main -> f:format.raw()}</div>
-								<div class="Article-Author marginTop-double show-for-small-only">
-									<div>
-										<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
-									</div>
-									<div>
-										<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
-									</div>
+								<div class="Article-Author marginTop-triple">
+									<f:if condition="{node.context.workspace.name} != 'live'">
+										<f:then>
+											<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
+											<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
+										</f:then>
+										<f:else>
+											<f:if condition="{author}">
+												<span class="Article-AuthorLabel">Автор: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'author', tag: 'span')}</span>
+											</f:if>
+											<f:if condition="{authorPhoto}">
+												<span class="Article-AuthorLabel">Фото: </span> <span class="Article-AuthorName">{neos:contentElement.editable(property: 'authorPhoto', tag: 'span')}</span>
+											</f:if>
+										</f:else>
+									</f:if>
 								</div>
 							</div>
 						</div>
