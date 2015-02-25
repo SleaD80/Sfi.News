@@ -14,14 +14,18 @@
 						<div class="grid-block">
 							<div class="large-10 large-offset-1 grid-content">
 								<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
-								<div class="Article-Date">
-									<w:date format="{configuration.dateFormat}">{date}</w:date>
+								<div>
+									<span class="Article-Date">
+										<w:date format="{configuration.dateFormat}">{date}</w:date>
+									</span>
+									&bull;
+									<a class="Article-CommentCount" href="#disqus_thread">Комментировать</a>
 								</div>
 							</div>
 						</div>
 						<div class="grid-block">
 							<div class="medium-10 large-8 medium-offset-1 large-offset-2 grid-content">
-								<div class="Article-Lead">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
+								<div class="Article-Lead marginTop-double">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
 							</div>
 						</div>
 						<div class="grid-block">
@@ -49,6 +53,10 @@
 											</f:if>
 										</f:else>
 									</f:if>
+								</div>
+
+								<div class="marginTop-triple">
+									<f:render partial="Disqus" />
 								</div>
 							</div>
 						</div>
