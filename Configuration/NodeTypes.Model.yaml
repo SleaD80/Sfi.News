@@ -36,7 +36,7 @@
       'Sfi.News:Announcement': true
       'Sfi.News:Category': true
 
-'Sfi.News:AbstractNews':
+'Sfi.News:AbstractArticle':
   abstract: TRUE
   superTypes:
     - 'TYPO3.Neos:Document'
@@ -139,12 +139,90 @@
         TYPO3.Neos/Validation/StringLengthValidator:
           minimum: 1
           maximum: 500
+    date:
+      type: date
+      defaultValue: 'now'
+      ui:
+        label: Date
+        reloadIfChanged: true
+        inspector:
+          group: news
+          editorOptions:
+            format: 'd-m-Y H:i'
+      validation:
+        'TYPO3.Neos/Validation/DateTimeValidator': []
+    hasVideo:
+      type: boolean
+      ui:
+        label: 'Has video?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+    hasPhoto:
+      type: boolean
+      ui:
+        label: 'Has photo?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+    hasAudio:
+      type: boolean
+      ui:
+        label: 'Has audio?'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'news'
+    # relatedNews:
+    #   type: references
+    #   ui:
+    #     label: 'Related news'
+    #     reloadIfChanged: true
+    #     inspector:
+    #       group: news
+    #       editorOptions:
+    #         nodeTypes:
+    #           - 'Sfi.News:News'
+
+
+'Sfi.News:ImportantMixin':
+  abstract: TRUE
+  properties:
     important:
       type: boolean
       ui:
         label: Important
         inspector:
           group: news
+
+# Abstract news is what goes in stream
+'Sfi.News:AbstractNews':
+  abstract: TRUE
+  superTypes:
+    - 'Sfi.News:AbstractArticle'
+
+'Sfi.News:News':
+  superTypes:
+    - 'Sfi.News:AbstractNews'
+    - 'Sfi.News:ImportantMixin'
+  properties:
+    variant:
+      defaultValue: 'Hard'
+      type: string
+      defaultValue: 'Inherit'
+      ui:
+        label: 'News variant'
+        reloadIfChanged: false
+        inspector:
+          group: news
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              'Inherit':
+                label: 'Inherit'
+              'Hard':
+                label: 'Hard'
+              'Soft':
+                label: 'Soft'
     author:
       type: string
       ui:
@@ -193,78 +271,13 @@
           link:
             a: true
           alignment: {  }
-    date:
-      type: date
-      defaultValue: 'now'
-      ui:
-        label: Date
-        reloadIfChanged: true
-        inspector:
-          group: news
-          editorOptions:
-            format: 'd-m-Y H:i'
-      validation:
-        'TYPO3.Neos/Validation/DateTimeValidator': []
-    # relatedNews:
-    #   type: references
-    #   ui:
-    #     label: 'Related news'
-    #     reloadIfChanged: true
-    #     inspector:
-    #       group: news
-    #       editorOptions:
-    #         nodeTypes:
-    #           - 'Sfi.News:News'
-    variant:
-      defaultValue: 'Hard'
-      type: string
-      defaultValue: 'Inherit'
-      ui:
-        label: 'News variant'
-        reloadIfChanged: false
-        inspector:
-          group: news
-          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
-          editorOptions:
-            values:
-              'Inherit':
-                label: 'Inherit'
-              'Hard':
-                label: 'Hard'
-              'Soft':
-                label: 'Soft'
     originalIdentifier:
       type: string
 
-'Sfi.News:News':
-  superTypes:
-    - 'Sfi.News:AbstractNews'
-  properties:
-    hasVideo:
-      type: boolean
-      ui:
-        label: 'Has video?'
-        reloadIfChanged: TRUE
-        inspector:
-          group: 'news'
-    hasPhoto:
-      type: boolean
-      ui:
-        label: 'Has photo?'
-        reloadIfChanged: TRUE
-        inspector:
-          group: 'news'
-    hasAudio:
-      type: boolean
-      ui:
-        label: 'Has audio?'
-        reloadIfChanged: TRUE
-        inspector:
-          group: 'news'
-
 'Sfi.News:Announcement':
   superTypes:
-    - 'Sfi.News:AbstractNews'
+    - 'Sfi.News:AbstractArticle'
+    - 'Sfi.News:ImportantMixin'
   ui:
     label: 'Announcement'
   properties:
