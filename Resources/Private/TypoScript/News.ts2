@@ -127,8 +127,14 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	configuration = ${configuration}
-	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractNews]').get()}
-	itemRenderer = Sfi.News:NewsShort
+	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractArticle]').get()}
+	itemRenderer = TYPO3.TypoScript:Case {
+		default {
+			@position = 'end'
+			condition = TRUE
+			type = 'Sfi.News:NewsShort'
+		}
+	}
 
 	attributes.data-columns = true
 	# TODO: find out why this doesn't work
@@ -174,4 +180,18 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 
 	newsCollection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
 	itemRenderer = Sfi.News:TopShort
+}
+
+
+
+
+prototype(Sfi.News:CategorizedList) {
+	templatePath = 'resource://Sfi.News/Private/Templates/CategorizedList.html'
+
+	categoryCollection = ${q(documentNode).find('[instanceof Sfi.News:Category]').get()}
+	itemRenderer = Sfi.News:List
+	prototype(Sfi.News:List) {
+		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
+		configuration = ${configuration}
+	}
 }

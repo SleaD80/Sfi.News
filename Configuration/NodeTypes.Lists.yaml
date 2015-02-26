@@ -44,3 +44,10 @@
   constraints:
     nodeTypes:
       '*': false
+
+
+'Sfi.News:CategorizedList':
+  superTypes:
+    - 'Sfi.News:NewsList'
+  ui:
+    label: 'Categorized Articles list'

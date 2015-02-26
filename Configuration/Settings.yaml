@@ -19,6 +19,12 @@ Sfi:
       listTitle: 'СФИ сегодня'
       class: 'NewsList-Grid grid-block'
       archiveLink: ''
+    articlesList:
+      numberOfItems: 100
+      pagination: ~
+      listTitle: ''
+      class: ''
+      archiveLink: ''
     newsLatest:
       numberOfItems: 6
       pagination: ~
