@@ -32,8 +32,7 @@
   constraints:
     nodeTypes:
       '*': false
-      'Sfi.News:News': true
-      'Sfi.News:Announcement': true
+      'Sfi.News:AbstractArticle': true
       'Sfi.News:Category': true
 
 'Sfi.News:AbstractArticle':
