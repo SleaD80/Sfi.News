@@ -204,7 +204,7 @@
         aloha:
           placeholder: 'Enter news author here'
           format:
-            b: false
+            b: true
             i: false
             u: false
             sub: false
