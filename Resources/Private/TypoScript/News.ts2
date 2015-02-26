@@ -79,7 +79,7 @@ prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 # Abstract List object
 prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 	@override.filterByTag = ${request.arguments.tag}
-	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractArticle]').get()}
 	# sort
 	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, 'DESC').get() : value}
 	# limit
@@ -118,7 +118,7 @@ prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
 	attributes.data-columns = true
 	attributes.class = ${configuration.class}
 
-	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').filter('[important != TRUE]').get()}
+	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:AbstractNews]').filter('[important != TRUE]').get()}
 	itemRenderer = Sfi.News:NewsShort
 }
 
@@ -172,6 +172,6 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
 	configuration = ${configuration}
 
-	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').filter('[important = TRUE]').get()}
+	newsCollection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
 	itemRenderer = Sfi.News:TopShort
 }

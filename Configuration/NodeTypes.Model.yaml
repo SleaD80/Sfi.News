@@ -194,35 +194,9 @@
         inspector:
           group: news
 
-# Abstract news is what goes in stream
-'Sfi.News:AbstractNews':
+'Sfi.News:AuthorMixin':
   abstract: TRUE
-  superTypes:
-    - 'Sfi.News:AbstractArticle'
-
-'Sfi.News:News':
-  superTypes:
-    - 'Sfi.News:AbstractNews'
-    - 'Sfi.News:ImportantMixin'
   properties:
-    variant:
-      defaultValue: 'Hard'
-      type: string
-      defaultValue: 'Inherit'
-      ui:
-        label: 'News variant'
-        reloadIfChanged: false
-        inspector:
-          group: news
-          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
-          editorOptions:
-            values:
-              'Inherit':
-                label: 'Inherit'
-              'Hard':
-                label: 'Hard'
-              'Soft':
-                label: 'Soft'
     author:
       type: string
       ui:
@@ -247,6 +221,37 @@
           link:
             a: true
           alignment: {  }
+
+# Abstract news is what goes in stream
+'Sfi.News:AbstractNews':
+  abstract: TRUE
+  superTypes:
+    - 'Sfi.News:AbstractArticle'
+
+'Sfi.News:News':
+  superTypes:
+    - 'Sfi.News:AbstractNews'
+    - 'Sfi.News:ImportantMixin'
+    - 'Sfi.News:AuthorMixin'
+  properties:
+    variant:
+      defaultValue: 'Hard'
+      type: string
+      defaultValue: 'Inherit'
+      ui:
+        label: 'News variant'
+        reloadIfChanged: false
+        inspector:
+          group: news
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              'Inherit':
+                label: 'Inherit'
+              'Hard':
+                label: 'Hard'
+              'Soft':
+                label: 'Soft'
     authorPhoto:
       type: string
       ui:
