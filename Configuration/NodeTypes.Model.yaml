@@ -134,10 +134,6 @@
           link:
             a: false
           alignment: {  }
-      validation:
-        TYPO3.Neos/Validation/StringLengthValidator:
-          minimum: 1
-          maximum: 500
     date:
       type: date
       defaultValue: 'now'
