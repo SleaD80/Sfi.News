@@ -2,8 +2,8 @@ prototype(Sfi.News:RssList) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/RssList.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.rssList')}
 	configuration = ${configuration}
-#.filter('[important != TRUE]')
 	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').get()}
+	newsCollection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.subtract(Date.now(), 'P7D')).get() : value}
 	itemRenderer = Sfi.News:RssItem
 }
 
