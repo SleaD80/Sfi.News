@@ -188,6 +188,12 @@
         label: Important
         inspector:
           group: news
+    importantSort:
+      type: string
+      ui:
+        label: Important sorting (1-3)
+        inspector:
+          group: news
 
 'Sfi.News:AuthorMixin':
   abstract: TRUE

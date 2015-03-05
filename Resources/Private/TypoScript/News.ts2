@@ -179,6 +179,7 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	configuration = ${configuration}
 
 	newsCollection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
+	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort('importantSort', 'ASC').get() : value}
 	itemRenderer = Sfi.News:TopShort
 }
 
