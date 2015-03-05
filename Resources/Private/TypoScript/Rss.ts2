@@ -3,6 +3,7 @@ prototype(Sfi.News:RssList) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.rssList')}
 	configuration = ${configuration}
 	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').get()}
+	newsCollection.@process.yandexOnly = ${q(value).count() > 0 ? q(value).filter('[yandex = TRUE]').get() : value}
 	newsCollection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.subtract(Date.now(), 'P7D')).get() : value}
 	itemRenderer = Sfi.News:RssItem
 }

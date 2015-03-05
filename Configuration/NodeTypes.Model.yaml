@@ -150,21 +150,21 @@
       type: boolean
       ui:
         label: 'Has video?'
-        reloadIfChanged: TRUE
+        reloadIfChanged: FALSE
         inspector:
           group: 'news'
     hasPhoto:
       type: boolean
       ui:
         label: 'Has photo?'
-        reloadIfChanged: TRUE
+        reloadIfChanged: FALSE
         inspector:
           group: 'news'
     hasAudio:
       type: boolean
       ui:
         label: 'Has audio?'
-        reloadIfChanged: TRUE
+        reloadIfChanged: FALSE
         inspector:
           group: 'news'
     # relatedNews:
@@ -222,6 +222,15 @@
   abstract: TRUE
   superTypes:
     - 'Sfi.News:AbstractArticle'
+  properties:
+    yandex:
+      type: boolean
+      defaultValue: TRUE
+      ui:
+        label: 'Yandex news'
+        reloadIfChanged: FALSE
+        inspector:
+          group: 'news'
 
 'Sfi.News:News':
   superTypes:
@@ -230,7 +239,6 @@
     - 'Sfi.News:AuthorMixin'
   properties:
     variant:
-      defaultValue: 'Hard'
       type: string
       defaultValue: 'Inherit'
       ui:
