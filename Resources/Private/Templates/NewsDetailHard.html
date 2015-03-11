@@ -3,10 +3,10 @@
 {namespace m=TYPO3\Media\ViewHelpers}
 {namespace w=Sfi\Widgets\ViewHelpers}
 
-<div class="grid-block">
-	<div class="grid-content">
-		<div class="NewsDetail grid-block">
-			<div class="NewsDetail-Article NewsDetail-Article--Hard grid-content">
+<div class="row">
+	<div class="columns">
+		<div class="NewsDetail row">
+			<div class="NewsDetail-Article NewsDetail-Article--Hard columns">
 				
 				<div class="Article Article--Hard">
 					<neos:contentElement.wrap node="{node}">
@@ -56,7 +56,7 @@
 				</div>
 
 			</div>
-			<div class="NewsDetail-MoreItems grid-content">
+			<div class="NewsDetail-MoreItems columns">
 				<div class="js-StickInParent">
 					{moreItems -> f:format.raw()}
 				</div>

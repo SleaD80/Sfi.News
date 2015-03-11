@@ -17,7 +17,7 @@ Sfi:
         maximumNumberOfLinks: 15
       sortProperty: date
       listTitle: 'СФИ сегодня'
-      class: 'NewsList-Grid grid-block'
+      class: 'NewsList-Grid row'
       archiveLink: ''
     articlesList:
       numberOfItems: 100
@@ -30,7 +30,7 @@ Sfi:
       pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
-      class: 'NewsLatest-Grid grid-block'
+      class: 'NewsLatest-Grid row'
       wrapClass: 'NewsLatest'
       archiveLink: '~/sfi-today'
     newsRelated:

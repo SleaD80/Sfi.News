@@ -23,7 +23,7 @@ categoryPage = Sfi.Sfi:Page {
 		listTitle = ${q(node).property('title')}
 	}
 
-	body.content.main = ${'<div class="grid-block"><div class="grid-content">' + newsList + '</div></div>'}
+	body.content.main = ${'<div class="row"><div class="columns">' + newsList + '</div></div>'}
 }
 root.categoryPage {
 	condition = ${q(node).is('[instanceof Sfi.News:Category]')}
