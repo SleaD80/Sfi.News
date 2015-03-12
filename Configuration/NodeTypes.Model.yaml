@@ -95,8 +95,8 @@
             b: true
             i: true
             u: false
-            sub: false
-            sup: false
+            sub: true
+            sup: true
             p: true
             h1: false
             h2: false
@@ -121,8 +121,8 @@
             b: true
             i: true
             u: false
-            sub: false
-            sup: false
+            sub: true
+            sup: true
             p: true
             h1: false
             h2: false
