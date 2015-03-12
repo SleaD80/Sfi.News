@@ -48,7 +48,7 @@
     coverCollection:
       type: 'TYPO3.Neos:ContentCollection'
     gallery:
-      type: 'Sfi.Widgets:Carousel'
+      type: 'Sfi.Shared:Carousel'
     assets:
       type: 'TYPO3.Neos:ContentCollection'
   ui:
