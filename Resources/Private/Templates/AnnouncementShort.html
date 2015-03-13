@@ -8,13 +8,13 @@
 			<f:if condition="{date}">
 				<div class="MediaAnnouncement-Date">
 					<div class="MediaAnnouncement-DateDay">
-						<w:date format="j">{date}</w:date>
+						<s:date format="j">{date}</s:date>
 					</div>
 					<div class="MediaAnnouncement-DateMonth">
-						<w:date format="F">{date}</w:date>
+						<s:date format="F">{date}</s:date>
 					</div>
 					<!-- Sorry -->
-					<f:if condition="{date -> w:date(format:'G:i')} != '0:00'">
+					<f:if condition="{date -> s:date(format:'G:i')} != '0:00'">
 						<div class="MediaAnnouncement-DateTime">
 							<s:date format="G:i">{date}</s:date>
 						</div>
