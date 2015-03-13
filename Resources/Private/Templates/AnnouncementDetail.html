@@ -1,7 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-{namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace m=TYPO3\Media\ViewHelpers}
-{namespace w=Sfi\Widgets\ViewHelpers}
+{namespace s=Sfi\Shared\ViewHelpers}
 
 <div class="NewsDetail row">
 	<div class="NewsDetail-Article NewsDetail-Article--Hard medium-8 columns">
@@ -12,7 +11,7 @@
 				<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
 				<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
 				<div class="Article-Bar overflow-hidden">
-					<div class="Article-Date float-left"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
+					<div class="Article-Date float-left"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
 					<div class="Article-Place float-right">
 						<span class="Article-Place">{neos:contentElement.editable(property: 'place')}</span>
 					</div>

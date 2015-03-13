@@ -1,7 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-{namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace m=TYPO3\Media\ViewHelpers}
-{namespace w=Sfi\Widgets\ViewHelpers}
+{namespace s=Sfi\Shared\ViewHelpers}
 
 <div class="List-Item">
 	<div class="Media">
@@ -19,7 +18,7 @@
 				</h3>
 				<div class="Media-Teaser">{teaser -> f:format.raw()}</div>
 				<f:if condition="{date}">
-					<div class="Media-Date"><w:date format="{configuration.dateFormat}">{date}</w:date></div>
+					<div class="Media-Date"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
 				</f:if>
 			</div>
 		</neos:link.node>

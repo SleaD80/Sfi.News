@@ -1,7 +1,6 @@
 {namespace neos=TYPO3\Neos\ViewHelpers}
-{namespace ts=TYPO3\TypoScript\ViewHelpers}
 {namespace m=TYPO3\Media\ViewHelpers}
-{namespace w=Sfi\Widgets\ViewHelpers}
+{namespace s=Sfi\Shared\ViewHelpers}
 
 <div class="row">
 	<div class="columns">
@@ -16,7 +15,7 @@
 								<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
 								<div class="textAlign-center">
 									<span class="Article-Date">
-										<w:date format="{configuration.dateFormat}">{date}</w:date>
+										<s:date format="{configuration.dateFormat}">{date}</s:date>
 									</span>
 									&bull;
 									<a class="Article-CommentCount" href="#disqus_thread">Комментировать</a>
