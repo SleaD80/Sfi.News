@@ -2,30 +2,28 @@
 {namespace m=TYPO3\Media\ViewHelpers}
 {namespace s=Sfi\Shared\ViewHelpers}
 
-<li class="List-Item">
-	<div class="MediaAnnouncement">
-		<neos:link.node node="{node}">
-			<f:if condition="{date}">
-				<div class="MediaAnnouncement-Date">
-					<div class="MediaAnnouncement-DateDay">
-						<s:date format="j">{date}</s:date>
-					</div>
-					<div class="MediaAnnouncement-DateMonth">
-						<s:date format="F">{date}</s:date>
-					</div>
-					<!-- Sorry -->
-					<f:if condition="{date -> s:date(format:'G:i')} != '0:00'">
-						<div class="MediaAnnouncement-DateTime">
-							<s:date format="G:i">{date}</s:date>
-						</div>
-					</f:if>
+<div class="MediaAnnouncement">
+	<neos:link.node node="{node}">
+		<f:if condition="{date}">
+			<div class="MediaAnnouncement-Date">
+				<div class="MediaAnnouncement-DateDay">
+					<s:date format="j">{date}</s:date>
 				</div>
-			</f:if>
-			<div class="MediaAnnouncement-WrapText">
-				<h3 class="MediaAnnouncement-Title">{title}</h3>
-				<p class="MediaAnnouncement-Teaser">{teaser}</p>
-				<div class="MediaAnnouncement-Place">{place -> f:format.raw()}</div>
+				<div class="MediaAnnouncement-DateMonth">
+					<s:date format="F">{date}</s:date>
+				</div>
+				<!-- Sorry -->
+				<f:if condition="{date -> s:date(format:'G:i')} != '0:00'">
+					<div class="MediaAnnouncement-DateTime">
+						<s:date format="G:i">{date}</s:date>
+					</div>
+				</f:if>
 			</div>
-		</neos:link.node>
-	</div>
-</li>
+		</f:if>
+		<div class="MediaAnnouncement-WrapText">
+			<h3 class="MediaAnnouncement-Title">{title}</h3>
+			<p class="MediaAnnouncement-Teaser">{teaser}</p>
+			<div class="MediaAnnouncement-Place">{place -> f:format.raw()}</div>
+		</div>
+	</neos:link.node>
+</div>

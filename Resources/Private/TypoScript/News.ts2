@@ -4,7 +4,6 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
 	partialRootPath = 'resource://Sfi.Sfi/Private/Partials'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsDetail')}
-	configuration = ${configuration}
 
 	title = ${q(node).property('title')}
 	teaser = ${q(node).property('teaser')}
@@ -64,7 +63,6 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 	templatePath = 'resource://Sfi.News/Private/Templates/NewsShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsShort')}
-	configuration = ${configuration}
 
 	title = ${String.stripTags(q(node).property('title'))}
 	date = ${q(node).property('date')}
@@ -75,22 +73,22 @@ prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 	category = ${q(node).parent().get(0)}
 }
 
+prototype(Sfi.News:Listable) < prototype(TYPO3.Neos:Content) {
+	templatePath = 'resource://Sfi.News/Private/Templates/Listable.html'
+	sortProperty = 'to-be-set'
+	numberOfItems = 10
 
-# Abstract List object
-prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
-	@override.filterByTag = ${request.arguments.tag}
-	newsCollection = ${q(site).find('[instanceof Sfi.News:AbstractArticle]').get()}
-	# sort
-	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort(configuration.sortProperty, 'DESC').get() : value}
-	# limit
-	newsCollection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
-	# filterByTag
-	newsCollection.@process.filterByTag = ${filterByTag != null ? q(value).filter('[tags *= ' + filterByTag + ']').get() : value}
-	itemRenderer = Sfi.News:NewsShort
+	collection = ${q(site).find('[instanceof Sfi.News:AbstractArticle]').get()}
+	collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(this.sortProperty, 'DESC').get() : value}
+	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(this.numberOfItems)).get() : value}
 
-	listTitle = ${configuration.listTitle}
-	attributes.class = ${configuration.class}
-	wrapClass = ${configuration.wrapClass}
+	itemRenderer = TYPO3.TypoScript:Case {
+		default {
+			@position = 'end'
+			condition = TRUE
+			type = 'Sfi.News:NewsShort'
+		}
+	}
 
 	@cache {
 		mode = 'cached'
@@ -109,34 +107,54 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.Neos:Content) {
 	}
 }
 
+# Abstract List object
+prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
+	attributes.class = ${configuration.wrapClass}
+	content = TYPO3.TypoScript:Array {
+		listTitleTag = TYPO3.TypoScript:Tag {
+			tagName = h2
+			attributes.class = ${configuration.listTitleClass}
+			content = ${configuration.listTitle}
+			#@if.isSet = ${listTitle != ''}
+		}
+		list = Sfi.News:Listable {
+			sortProperty = ${configuration.sortProperty}
+			numberOfItems = ${configuration.numberOfItems}
+			attributes = TYPO3.TypoScript:Attributes {
+				class = ${configuration.class}
+			}
+		}
+		archiveLink = TYPO3.TypoScript:Tag {
+			tagName = 'a'
+			attributes.class = 'ButtonInline News-MoreButton right'
+			attributes.href = TYPO3.Neos:NodeUri {
+				node = ${configuration.archiveLink}
+			}
+			content = ${configuration.archiveLinkTitle}
+			@if.isSet = ${configuration.archiveLink != ''}
+		}
+	}
+}
+
+
 # Show latest news
 prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
-	configuration = ${configuration}
 
-	attributes.data-columns = true
-	attributes.class = ${configuration.class}
-
-	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:AbstractNews]').get()}
-	itemRenderer = Sfi.News:NewsShort
+	prototype(Sfi.News:Listable) {
+		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+		attributes.data-columns = true
+	}
 }
 
 # List all articles, defined be category, paginated
 prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
-	configuration = ${configuration}
-	newsCollection = ${q(node).find('[instanceof Sfi.News:AbstractArticle]').get()}
-	itemRenderer = TYPO3.TypoScript:Case {
-		default {
-			@position = 'end'
-			condition = TRUE
-			type = 'Sfi.News:NewsShort'
-		}
-	}
 
-	attributes.data-columns = true
+	prototype(Sfi.News:Listable) {
+		collection = ${q(node).find('[instanceof Sfi.News:AbstractArticle]').get()}
+		attributes.data-columns = true
+	}
 	# TODO: find out why this doesn't work
 	# pagination = ${request.pluginArguments.news.currentPage}
 	@cache {
@@ -152,13 +170,14 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
-	configuration = ${configuration}
 
-	newsCollection.@process.filterOutSelf {
-		expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
-		@position = 'start'
+	prototype(Sfi.News:Listable) {
+		collection.@process.filterOutSelf {
+			expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
+			@position = 'start'
+		}
+		itemRenderer = Sfi.News:NewsShort
 	}
-	itemRenderer = Sfi.News:NewsShort
 	prototype(Sfi.News:NewsShort) {
 		@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
 		templatePath = 'resource://Sfi.News/Private/Templates/NewsShortSmall.html'
@@ -170,30 +189,31 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
-	configuration = ${configuration}
 }
 
 prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
-	configuration = ${configuration}
 
-	newsCollection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
-	newsCollection.@process.sort = ${q(value).count() > 0 ? q(value).sort('importantSort', 'ASC').get() : value}
-	itemRenderer = Sfi.News:TopShort
+	prototype(Sfi.News:Listable) {
+		collection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
+		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort('importantSort', 'ASC').get() : value}
+		itemRenderer = Sfi.News:TopShort
+	}
 }
 
 
 
-
-prototype(Sfi.News:CategorizedList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/CategorizedList.html'
-
-	categoryCollection = ${q(documentNode).find('[instanceof Sfi.News:Category]').get()}
-	itemRenderer = Sfi.News:List
+prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
+	content = TYPO3.TypoScript:Collection {
+		collection = ${q(documentNode).find('[instanceof Sfi.News:Category]').get()}
+		itemRenderer = Sfi.News:List
+		itemName = 'node'
+		iterationName = 'iterator'
+	}
 	prototype(Sfi.News:List) {
 		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
-		configuration = ${configuration}
+		content.listTitleTag.content = ${node.properties.title}
 	}
 
 	@cache {

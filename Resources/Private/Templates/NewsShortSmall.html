@@ -2,25 +2,23 @@
 {namespace m=TYPO3\Media\ViewHelpers}
 {namespace s=Sfi\Shared\ViewHelpers}
 
-<div class="List-Item">
-	<div class="MediaSmall">
-		<neos:link.node node="{node}">
-			<div class="MediaSmall-Image" >
-				<f:if condition="{thumbnailImage}">
-					<f:if condition="{thumbnailImage.properties.image}">
-						<m:image asset="{thumbnailImage.properties.image}" maximumWidth="{configuration.thumbnailWidth}" maximumHeight="{configuration.thumbnailHeight}" allowCropping="true" allowUpScaling="true" alt="{thumbnailImage.properties.alternativeText}" />    
-					</f:if>
+<div class="MediaSmall">
+	<neos:link.node node="{node}">
+		<div class="MediaSmall-Image" >
+			<f:if condition="{thumbnailImage}">
+				<f:if condition="{thumbnailImage.properties.image}">
+					<m:image asset="{thumbnailImage.properties.image}" maximumWidth="{configuration.thumbnailWidth}" maximumHeight="{configuration.thumbnailHeight}" allowCropping="true" allowUpScaling="true" alt="{thumbnailImage.properties.alternativeText}" />    
 				</f:if>
-			</div>
-			<div class="MediaSmall-Body">
-				<h3 class="MediaSmall-Title">
-					{title}
-				</h3>
-				<div class="MediaSmall-Teaser">{teaser -> f:format.raw()}</div>
-				<f:if condition="{date}">
-					<div class="MediaSmall-Date"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
-				</f:if>
-			</div>
-		</neos:link.node>
-	</div>
+			</f:if>
+		</div>
+		<div class="MediaSmall-Body">
+			<h3 class="MediaSmall-Title">
+				{title}
+			</h3>
+			<div class="MediaSmall-Teaser">{teaser -> f:format.raw()}</div>
+			<f:if condition="{date}">
+				<div class="MediaSmall-Date"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
+			</f:if>
+		</div>
+	</neos:link.node>
 </div>

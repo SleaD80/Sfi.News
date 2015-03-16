@@ -17,12 +17,14 @@ Sfi:
         maximumNumberOfLinks: 15
       sortProperty: date
       listTitle: 'СФИ сегодня'
+      listTitleClass: 'SectionDivider--Service'
       class: 'NewsList-Grid row'
       archiveLink: ''
     articlesList:
       numberOfItems: 100
       pagination: ~
       listTitle: ''
+      listTitleClass: 'H3 textAlign-center'
       class: ''
       archiveLink: ''
     newsLatest:
@@ -30,15 +32,18 @@ Sfi:
       pagination: ~
       sortProperty: date
       listTitle: 'СФИ сегодня'
+      listTitleClass: 'SectionDivider--Service'
       class: 'NewsLatest-Grid row'
       wrapClass: 'NewsLatest'
       archiveLink: '~/sfi-today'
+      archiveLinkTitle: 'Все новости'
     newsRelated:
       numberOfItems: 4
       sortProperty: date
       listTitle: ''
       class: ''
       archiveLink: '~/sfi-today'
+      archiveLinkTitle: 'Все новости'
       thumbnailWidth: 100
       thumbnailHeight: 100
       dateFormat: 'j F Y'
