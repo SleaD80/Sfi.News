@@ -1,3 +1,4 @@
+# Define Aloha presets to reuse throughout the document
 blah: &alohaPlain
   placeholder: 'Enter title here'
   format:
@@ -34,24 +35,6 @@ blah: &alohaRich
     removeFormat: false
   table: {  }
   list: {  }
-  link:
-    a: true
-  alignment: {  }
-
-blah: &alohaFull
-  placeholder: 'Enter title here'
-  format:
-    b: true
-    i: true
-    u: false
-    sub: true
-    sup: true
-    p: true
-    h1: true
-    h2: true
-    h3: true
-    pre: false
-    removeFormat: true
   link:
     a: true
   alignment: {  }
