@@ -214,6 +214,7 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 	prototype(Sfi.News:List) {
 		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
 		content.listTitleTag.content = ${node.properties.title}
+		content.listTitleTag.@if.isSet = ${true}
 	}
 
 	@cache {
