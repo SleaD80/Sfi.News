@@ -51,3 +51,25 @@
     - 'Sfi.News:NewsList'
   ui:
     label: 'Categorized Articles list'
+
+
+'Sfi.News:ListByTag':
+  superTypes:
+    - 'Sfi.News:NewsList'
+  ui:
+    label: 'List news by tag'
+    inspector:
+      groups:
+        news:
+          label: 'News'
+  properties:
+    tag:
+      type: reference
+      ui:
+        label: 'Tag to list news by'
+        reloadIfChanged: true
+        inspector:
+          group: news
+          editorOptions:
+            nodeTypes:
+              - 'TYPO3.Neos.NodeTypes:Page'

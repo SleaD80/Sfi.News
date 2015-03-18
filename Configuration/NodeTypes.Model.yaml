@@ -179,16 +179,16 @@ blah: &alohaFull
         reloadIfChanged: FALSE
         inspector:
           group: 'news'
-    # relatedNews:
-    #   type: references
-    #   ui:
-    #     label: 'Related news'
-    #     reloadIfChanged: true
-    #     inspector:
-    #       group: news
-    #       editorOptions:
-    #         nodeTypes:
-    #           - 'Sfi.News:News'
+    tags:
+      type: references
+      ui:
+        label: 'Tags'
+        reloadIfChanged: true
+        inspector:
+          group: news
+          editorOptions:
+            nodeTypes:
+              - 'TYPO3.Neos.NodeTypes:Page'
 
 
 'Sfi.News:ImportantMixin':
