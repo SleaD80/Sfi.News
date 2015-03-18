@@ -115,7 +115,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 			tagName = h2
 			attributes.class = ${configuration.listTitleClass}
 			content = ${configuration.listTitle}
-			#@if.isSet = ${listTitle != ''}
+			@if.isSet = ${configuration.listTitle != ''}
 		}
 		list = Sfi.News:Listable {
 			sortProperty = ${configuration.sortProperty}
