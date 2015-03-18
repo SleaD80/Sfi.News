@@ -1,3 +1,61 @@
+blah: &alohaPlain
+  placeholder: 'Enter title here'
+  format:
+    b: false
+    i: false
+    u: false
+    sub: false
+    sup: false
+    p: false
+    h1: false
+    h2: false
+    h3: false
+    pre: false
+    removeFormat: false
+  table: {  }
+  list: {  }
+  link:
+    a: false
+  alignment: {  }
+
+blah: &alohaRich
+  placeholder: 'Enter title here'
+  format:
+    b: true
+    i: true
+    u: false
+    sub: true
+    sup: true
+    p: false
+    h1: false
+    h2: false
+    h3: false
+    pre: false
+    removeFormat: false
+  table: {  }
+  list: {  }
+  link:
+    a: true
+  alignment: {  }
+
+blah: &alohaFull
+  placeholder: 'Enter title here'
+  format:
+    b: true
+    i: true
+    u: false
+    sub: true
+    sup: true
+    p: true
+    h1: true
+    h2: true
+    h3: true
+    pre: false
+    removeFormat: true
+  link:
+    a: true
+  alignment: {  }
+
 'Sfi.News:Category':
   superTypes:
     - 'TYPO3.Neos:Document'
@@ -35,6 +93,8 @@
       'Sfi.News:AbstractArticle': true
       'Sfi.News:Category': true
 
+
+
 'Sfi.News:AbstractArticle':
   abstract: TRUE
   superTypes:
@@ -63,25 +123,9 @@
     title:
       ui:
         inlineEditable: true
-        aloha:
-          placeholder: 'Enter title here'
-          format:
-            b: false
-            i: false
-            u: false
-            sub: false
-            sup: false
-            p: false
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: true
-          alignment: {  }
+        aloha: 
+          <<: *alohaPlain
+          placeholder: 'Заголовок новости'
     teaser:
       type: string
       ui:
@@ -90,24 +134,8 @@
         inspector:
           group: null
         aloha:
-          placeholder: 'Enter teaser here'
-          format:
-            b: true
-            i: true
-            u: false
-            sub: true
-            sup: true
-            p: true
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: true
-          alignment: {  }
+          <<: *alohaRich
+          placeholder: 'Тизер'
     lead:
       type: string
       ui:
@@ -116,24 +144,8 @@
         inspector:
           group: null
         aloha:
-          placeholder: 'Enter Lead text here'
-          format:
-            b: true
-            i: true
-            u: false
-            sub: true
-            sup: true
-            p: true
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: false
-          alignment: {  }
+          <<: *alohaRich
+          placeholder: 'Лид'
     date:
       type: date
       defaultValue: 'now'
@@ -204,24 +216,8 @@
         label: 'Author name'
         inlineEditable: true
         aloha:
-          placeholder: 'Enter news author here'
-          format:
-            b: true
-            i: false
-            u: false
-            sub: false
-            sup: false
-            p: false
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: true
-          alignment: {  }
+          <<: *alohaPlain
+          placeholder: 'Автор новости'
 
 # Abstract news is what goes in stream
 'Sfi.News:AbstractNews':
@@ -267,24 +263,8 @@
         label: 'Author of photos'
         inlineEditable: true
         aloha:
-          placeholder: 'Author of photos'
-          format:
-            b: false
-            i: false
-            u: false
-            sub: false
-            sup: false
-            p: false
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: true
-          alignment: {  }
+          <<: *alohaPlain
+          placeholder: 'Автор фото'
     originalIdentifier:
       type: string
 
@@ -299,21 +279,5 @@
       ui:
         inlineEditable: true
         aloha:
-          placeholder: 'Enter announcement place here'
-          format:
-            b: false
-            i: false
-            u: false
-            sub: false
-            sup: false
-            p: false
-            h1: false
-            h2: false
-            h3: false
-            pre: false
-            removeFormat: false
-          table: {  }
-          list: {  }
-          link:
-            a: false
-          alignment: {  }
+          <<: *alohaPlain
+          placeholder: 'Место анонса'
