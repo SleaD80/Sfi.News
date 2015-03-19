@@ -1,1 +1,15 @@
-{"name":"sfi\/news","type":"typo3-flow-package","description":"Tiny node-based news extension for sfi.ru","require":{"typo3\/flow":"*"},"autoload":{"psr-0":{"Sfi\\News":"Classes"}}}
+{
+	"name": "sfi/news",
+	"type": "typo3-flow-package",
+	"description": "Tiny node-based news extension for sfi.ru",
+	"require": {
+		"typo3/neos": "*",
+		"typo3/neos-nodetypes": "*",
+		"sfi/shared": "*"
+	},
+	"autoload": {
+		"psr-0": {
+			"Sfi\\News":"Classes"
+		}
+	}
+}

@@ -4,6 +4,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
 	partialRootPath = 'resource://Sfi.Sfi/Private/Partials'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsDetail')}
+	configuration = ${configuration}
 
 	title = ${q(node).property('title')}
 	teaser = ${q(node).property('teaser')}
@@ -63,6 +64,7 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
 	templatePath = 'resource://Sfi.News/Private/Templates/NewsShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsShort')}
+	configuration = ${configuration}
 
 	title = ${String.stripTags(q(node).property('title'))}
 	date = ${q(node).property('date')}
@@ -140,6 +142,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 # Show latest news
 prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
+	configuration = ${configuration}
 
 	prototype(Sfi.News:Listable) {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
@@ -170,6 +173,7 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
+	configuration = ${configuration}
 
 	prototype(Sfi.News:Listable) {
 		collection.@process.filterOutSelf {
@@ -189,11 +193,13 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
+	configuration = ${configuration}
 }
 
 prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
+	configuration = ${configuration}
 
 	prototype(Sfi.News:Listable) {
 		collection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
@@ -213,6 +219,7 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 	}
 	prototype(Sfi.News:List) {
 		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
+		configuration = ${configuration}
 		content.listTitleTag.content = ${node.properties.title}
 		content.listTitleTag.@if.isSet = ${true}
 	}
@@ -237,6 +244,7 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 
 prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
+	configuration = ${configuration}
 
 	prototype(Sfi.News:Listable) {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
