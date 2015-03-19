@@ -4,9 +4,7 @@
 	"description": "Tiny node-based news extension for sfi.ru",
 	"require": {
 		"typo3/neos": "*",
-		"typo3/neos-nodetypes": "*",
-		"sfi/shared": "@dev",
-		"sfi/sfi": "@dev"
+		"typo3/neos-nodetypes": "*"
 	},
 	"autoload": {
 		"psr-0": {
