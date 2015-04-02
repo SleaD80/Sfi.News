@@ -79,3 +79,14 @@ Sfi:
     rssList:
       numberOfItems: 50
       sortProperty: date
+      archiveLink: ''
+    listByTag:
+      numberOfItems: 10000
+      pagination:
+        itemsPerPage: 24
+        maximumNumberOfLinks: 15
+      sortProperty: date
+      listTitle: 'Материалы по теме'
+      listTitleClass: 'SectionDivider--Service'
+      class: 'NewsByTag-Grid row'
+      archiveLink: ''
