@@ -20,6 +20,7 @@ Sfi:
         itemsPerPage: 24
         maximumNumberOfLinks: 15
       sortProperty: 'date'
+      itemRenderer: ''
       listTitle: ''
       listTitleClass: ''
       class: 'row'

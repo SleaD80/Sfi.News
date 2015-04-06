@@ -68,9 +68,15 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.listNode')}
 	@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
-
+	@override.itemRendererProperty = ${q(node).property('itemRenderer')}
+	@override.rootNode = ${q(node).property('rootNode') ? q(node).property('rootNode') : documentNode}
 	prototype(Sfi.News:Listable) {
-		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
+		collection = ${q(rootNode).children('[instanceof Sfi.News:Listable]').get()}
+		itemRenderer.itemRendererByProperty {
+			condition = ${itemRendererProperty}
+			@position = 'start'
+			type = ${itemRendererProperty}
+		}
 	}
 	@cache {
 		mode = 'uncached'
