@@ -1,38 +1,82 @@
-'Sfi.News:NewsList':
+'Sfi.News:ListNode':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    label: 'News list'
+    label: 'List of listable things'
     icon: icon-list
     inlineEditable: true
     group: news
+    inspector:
+      groups:
+        list:
+          label: 'List settings'
+  properties:
+    paginationEnabled:
+      type: boolean
+      ui:
+        label: 'Enable pagination'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    sortProperty:
+      type: string
+      defaultValue: 'date'
+      ui:
+        label: 'Sort property'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    wrapClass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Wrap class'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    class:
+      type: string
+      defaultValue: 'row'
+      ui:
+        label: 'List class'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    itemClass:
+      type: string
+      defaultValue: 'columns'
+      ui:
+        label: 'Item class'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    listTitleClass:
+      type: string
+      defaultValue: 'SectionDivider--Service'
+      ui:
+        label: 'List title class'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    listTitle:
+      type: string
+      defaultValue: 'Заголовок списка'
+      ui:
+        label: 'List title'
+        reloadIfChanged: true
+        inspector:
+          group: list
+    archiveLink:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Archive link'
+        reloadIfChanged: true
+        inspector:
+          group: list
   constraints:
     nodeTypes:
       '*': false
-
-'Sfi.News:NewsLatest':
-  superTypes:
-    - 'TYPO3.Neos:Content'
-  ui:
-    label: 'News latest'
-    icon: icon-list
-    inlineEditable: true
-    group: news
-  constraints:
-    nodeTypes:
-      '*': false
-
-'Sfi.News:AnnouncementsList':
-  superTypes:
-    - 'Sfi.News:NewsList'
-  ui:
-    label: 'Announcements list'
-
-'Sfi.News:TopList':
-  superTypes:
-    - 'Sfi.News:NewsList'
-  ui:
-    label: 'Top list'
 
 'Sfi.News:Rss':
   superTypes:
@@ -48,14 +92,14 @@
 
 'Sfi.News:CategorizedList':
   superTypes:
-    - 'Sfi.News:NewsList'
+    - 'Sfi.News:ListNode'
   ui:
     label: 'Categorized Articles list'
 
 
 'Sfi.News:ListByTag':
   superTypes:
-    - 'Sfi.News:NewsList'
+    - 'Sfi.News:ListNode'
   ui:
     label: 'List news by tag'
     inspector:

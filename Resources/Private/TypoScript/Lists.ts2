@@ -1,87 +1,11 @@
-#Display full view of article
-prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
-	@override.variant = ${q(node).property('variant') != 'Inherit' ? q(node).property('variant') : q(node).parent().property('variant')}
-	templatePath = ${'resource://Sfi.News/Private/Templates/NewsDetail' + q(node).parent().property('variant') + '.html'}
-	partialRootPath = 'resource://Sfi.Sfi/Private/Partials'
-	@override.configuration = ${Configuration.setting('Sfi.News.newsDetail')}
-	configuration = ${configuration}
-
-	title = ${q(node).property('title')}
-	teaser = ${q(node).property('teaser')}
-	lead = ${q(node).property('lead')}
-	author = ${String.stripTags(q(node).property('author'))}
-	authorPhoto = ${String.stripTags(q(node).property('authorPhoto'))}
-	date = ${q(node).property('date')}
-
-	coverCollection = TYPO3.Neos:ContentCollection{
-		nodePath = 'coverCollection'
-		prototype(TYPO3.Neos.NodeTypes:Image){
-			maximumWidth = 980
-			maximumHeight = 653
-			allowCropping = TRUE
-		}
-		@if.notVideoOrBackend = ${(q(node).property('hasVideo') != true) || (node.context.workspace.name != 'live')}
-	}
-	gallery = Sfi.Shared:Carousel{
-		content.collection = ${q(node).children('gallery').children()}
-		attributes.class = 'Carousel js-carousel-2x'
-		@if.hassGallery = ${q(node).children('gallery').children().count() > 0}
-	}
-
-	main = TYPO3.Neos:ContentCollection{
-		nodePath = 'main'
-	}
-	assets = TYPO3.Neos:ContentCollection{
-		nodePath = 'assets'
-	}
-
-	category = ${q(node).parent().get(0)}
-
-	#####
-	moreItems = Sfi.News:NewsRelated{
-		newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
-	}
-
-
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
-	}
-}
-
-#Breif rendering of article, used in NewsList
-prototype(Sfi.News:NewsShort) < prototype(TYPO3.Neos:Content) {
-	templatePath = 'resource://Sfi.News/Private/Templates/NewsShort.html'
-	@override.configuration = ${Configuration.setting('Sfi.News.newsShort')}
-	configuration = ${configuration}
-
-	title = ${String.stripTags(q(node).property('title'))}
-	date = ${q(node).property('date')}
-	teaser = ${String.stripTags(q(node).property('teaser'))}
-	# first image found becomes the thumbnail image TODO: remove legacy support for coverPhoto
-	thumbnailImage = ${q(node).children('coverCollection').children().count() > 0 ? q(node).children('coverCollection').children().get(0) : null}
-	#parrent node is the category
-	category = ${q(node).parent().get(0)}
-}
-
 prototype(Sfi.News:Listable) < prototype(TYPO3.Neos:Content) {
 	templatePath = 'resource://Sfi.News/Private/Templates/Listable.html'
-	sortProperty = 'to-be-set'
+	sortProperty = ''
 	numberOfItems = 10
+	paginationEnabled = ${true}
 
-	collection = ${q(site).find('[instanceof Sfi.News:AbstractArticle]').get()}
-	collection.@process.sort = ${q(value).count() > 0 ? q(value).sort(this.sortProperty, 'DESC').get() : value}
+	collection = ${q(site).find('[instanceof Sfi.News:Listable]').get()}
+	collection.@process.sort = ${this.sortProperty ? q(value).sort(this.sortProperty, 'DESC').get() : value}
 	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(this.numberOfItems)).get() : value}
 
 	itemRenderer = TYPO3.TypoScript:Case {
@@ -122,6 +46,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 		list = Sfi.News:Listable {
 			configuration = ${configuration}
 			sortProperty = ${configuration.sortProperty}
+			paginationEnabled = ${configuration.paginationEnabled}
 			numberOfItems = ${configuration.numberOfItems}
 			attributes = TYPO3.TypoScript:Attributes {
 				class = ${configuration.class}
@@ -139,25 +64,32 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 	}
 }
 
-
-# Show latest news
-prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
-	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
-	configuration = ${configuration}
+# List all Listable items descendant of current node
+prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
+	@override.configuration = ${Configuration.setting('Sfi.News.listNode')}
+	@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
 
 	prototype(Sfi.News:Listable) {
-		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
-		attributes.data-columns = true
+		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
+	}
+	@cache {
+		mode = 'uncached'
+		context {
+			1 = 'node'
+			2 = 'documentNode'
+			3 = 'site'
+		}
 	}
 }
 
-# List all articles, defined be category, paginated
+# List all Listable items descendant of current node
 prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
+	@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
 
 	prototype(Sfi.News:Listable) {
-		collection = ${q(node).find('[instanceof Sfi.News:AbstractArticle]').get()}
-		attributes.data-columns = true
+		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
+		data-columns = ${true}
 	}
 	# TODO: find out why this doesn't work
 	# pagination = ${request.pluginArguments.news.currentPage}
@@ -171,8 +103,19 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	}
 }
 
+# Show latest news
+prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
+	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
+	configuration = ${configuration}
+
+	prototype(Sfi.News:Listable) {
+		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+		attributes.data-columns = true
+	}
+}
+
+
 prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
 	configuration = ${configuration}
 
@@ -190,15 +133,7 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 }
 
 
-
-prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
-	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
-	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
-	configuration = ${configuration}
-}
-
 prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
-	templatePath = 'resource://Sfi.News/Private/Templates/List.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topList')}
 	configuration = ${configuration}
 
@@ -208,7 +143,6 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 		itemRenderer = Sfi.News:TopShort
 	}
 }
-
 
 
 prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {

@@ -76,12 +76,14 @@ blah: &alohaRich
       'Sfi.News:AbstractArticle': true
       'Sfi.News:Category': true
 
-
+'Sfi.News:Listable':
+  abstract: TRUE
 
 'Sfi.News:AbstractArticle':
   abstract: TRUE
   superTypes:
     - 'TYPO3.Neos:Document'
+    - 'Sfi.News:Listable'
   constraints:
     nodeTypes:
       '*': false

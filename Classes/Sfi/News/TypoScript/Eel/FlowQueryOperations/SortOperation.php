@@ -2,7 +2,7 @@
 namespace Sfi\News\TypoScript\Eel\FlowQueryOperations;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Sfi.News".          *
+ * This script was borrowed from package "Lelesys.News".          *
  *                                                                        *
  *                                                                        */
 
