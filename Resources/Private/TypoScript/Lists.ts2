@@ -95,7 +95,7 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 
 	prototype(Sfi.News:Listable) {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
-		data-columns = ${true}
+		attributes.data-columns = true
 	}
 	# TODO: find out why this doesn't work
 	# pagination = ${request.pluginArguments.news.currentPage}
