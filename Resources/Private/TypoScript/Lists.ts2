@@ -86,6 +86,7 @@ prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
 			3 = 'site'
 		}
 	}
+	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
 # List all Listable items descendant of current node
@@ -183,6 +184,7 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 			2 = ${'DescendantOf_' + documentNode.identifier}
 		}
 	}
+	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
 
@@ -195,4 +197,5 @@ prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 		collection.@process.filterByReference = ${q(node).property('tag') ? q(value).filterByReference('tags', q(node).property('tag')).get() : q(value).filterByReference('tags', documentNode).get()}
 		attributes.data-columns = true
 	}
+	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
