@@ -78,22 +78,12 @@ prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
 			type = ${itemRendererProperty}
 		}
 	}
-	@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-			2 = 'documentNode'
-			3 = 'site'
-		}
-	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
-# List all Listable items descendant of current node
+# List all Listable items descendant of current node. Used for News archive
 prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
-	@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
-
 	prototype(Sfi.News:Listable) {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
 		attributes.data-columns = true
@@ -155,17 +145,16 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 	content = TYPO3.TypoScript:Collection {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:Category]').get()}
-		itemRenderer = Sfi.News:List
 		itemName = 'categoryNode'
 		iterationName = 'iterator'
-	}
-	prototype(Sfi.News:List) {
-		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
-		configuration = ${configuration}
-		content.listTitleTag.content = ${categoryNode.properties.title}
-		content.listTitleTag.@if.isSet = ${true}
-		prototype(Sfi.News:Listable) {
-			collection = ${q(categoryNode).find('[instanceof Sfi.News:Listable]').get()}
+		itemRenderer = Sfi.News:AbstractList {
+			@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
+			configuration = ${configuration}
+			content.listTitleTag.content = ${categoryNode.properties.title}
+			content.listTitleTag.@if.isSet = ${true}
+			prototype(Sfi.News:Listable) {
+				collection = ${q(categoryNode).find('[instanceof Sfi.News:Listable]').get()}
+			}
 		}
 	}
 
