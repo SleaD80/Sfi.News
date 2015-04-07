@@ -155,14 +155,17 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 	content = TYPO3.TypoScript:Collection {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:Category]').get()}
 		itemRenderer = Sfi.News:List
-		itemName = 'node'
+		itemName = 'categoryNode'
 		iterationName = 'iterator'
 	}
 	prototype(Sfi.News:List) {
 		@override.configuration = ${Configuration.setting('Sfi.News.articlesList')}
 		configuration = ${configuration}
-		content.listTitleTag.content = ${node.properties.title}
+		content.listTitleTag.content = ${categoryNode.properties.title}
 		content.listTitleTag.@if.isSet = ${true}
+		prototype(Sfi.News:Listable) {
+			collection = ${q(categoryNode).find('[instanceof Sfi.News:Listable]').get()}
+		}
 	}
 
 	@cache {
