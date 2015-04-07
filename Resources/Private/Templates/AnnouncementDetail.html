@@ -11,7 +11,12 @@
 				<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser')}</div>
 				<div class="Article-Lead">{neos:contentElement.editable(property: 'lead')}</div>
 				<div class="Article-Bar overflow-hidden">
-					<div class="Article-Date float-left"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
+					<div class="Article-Date float-left">
+						<f:if condition="{dateStart}">
+							<s:date format="{configuration.dateFormat}">{dateStart}</s:date> –
+						</f:if>
+						<s:date format="{configuration.dateFormat}">{date}</s:date>
+					</div>
 					<div class="Article-Place float-right">
 						<span class="Article-Place">{neos:contentElement.editable(property: 'place')}</span>
 					</div>

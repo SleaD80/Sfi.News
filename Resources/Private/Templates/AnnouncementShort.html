@@ -4,14 +4,14 @@
 
 <div class="MediaAnnouncement">
 	<neos:link.node node="{node}">
+		
 		<f:if condition="{date}">
 			<div class="MediaAnnouncement-Date">
-				<div class="MediaAnnouncement-DateDay">
-					<s:date format="j">{date}</s:date>
-				</div>
-				<div class="MediaAnnouncement-DateMonth">
-					<s:date format="F">{date}</s:date>
-				</div>
+				<f:if condition="{dateStart}">
+					<div><span class="MediaAnnouncement-DateDay"><s:date format="j">{dateStart}</s:date>.</span><span class="MediaAnnouncement-DateMonth"><s:date format="m">{dateStart}</s:date></span></div>
+					<div class="MediaAnnouncement-DateDash">—</div>
+				</f:if>
+				<span class="MediaAnnouncement-DateDay"><s:date format="j">{date}</s:date>.</span><span class="MediaAnnouncement-DateMonth"><s:date format="m">{date}</s:date></span>
 				<!-- Sorry -->
 				<f:if condition="{date -> s:date(format:'G:i')} != '0:00'">
 					<div class="MediaAnnouncement-DateTime">

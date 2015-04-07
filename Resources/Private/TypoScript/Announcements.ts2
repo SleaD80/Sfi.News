@@ -4,6 +4,7 @@ prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
 	configuration = ${configuration}
 
 	place = ${q(node).property('place')}
+	dateStart = ${q(node).property('dateStart')}
 
 	moreItems = Sfi.News:NewsRelated {
 		prototype(Sfi.News:Listable) {
@@ -19,6 +20,7 @@ prototype(Sfi.News:AnnouncementShort) < prototype(Sfi.News:NewsShort) {
 	configuration = ${configuration}
 
 	place = ${String.stripTags(q(node).property('place'))}
+	dateStart = ${q(node).property('dateStart')}
 }
 
 prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {

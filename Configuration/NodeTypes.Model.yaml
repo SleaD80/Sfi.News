@@ -266,3 +266,33 @@ blah: &alohaRich
         aloha:
           <<: *alohaPlain
           placeholder: 'Место анонса'
+
+'Sfi.News:Announcement':
+  superTypes:
+    - 'Sfi.News:AbstractArticle'
+    - 'Sfi.News:ImportantMixin'
+  ui:
+    label: 'Announcement'
+  properties:
+    place:
+      ui:
+        inlineEditable: true
+        aloha:
+          <<: *alohaPlain
+          placeholder: 'Место анонса'
+    dateStart:
+      type: date
+      defaultValue: ''
+      ui:
+        label: 'Дата начала анонса'
+        reloadIfChanged: true
+        inspector:
+          group: news
+          position: 1
+          editorOptions:
+            format: 'd-m-Y H:i'
+    date:
+      ui:
+        label: 'Дата (0:00 если без времени)'
+        inspector:
+          position: 2
