@@ -10,7 +10,7 @@
 				<div class="Article Article--Hard">
 					<neos:contentElement.wrap node="{node}">
 						<h1 class="Article-Title">{neos:contentElement.editable(property: 'title', tag: 'span')}</h1>
-						<div class="Article-Teaser">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
+						<div class="Article-Teaser RteTextLinkable">{neos:contentElement.editable(property: 'teaser', tag: 'span')}</div>
 						<div>
 							<span class="Article-Date">
 								<s:date format="{configuration.dateFormat}">{date}</s:date>
@@ -18,7 +18,7 @@
 							&bull;
 							<a class="Article-CommentCount" href="#disqus_thread">Комментировать</a>
 						</div>
-						<div class="Article-Lead marginTop-double">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
+						<div class="Article-Lead RteTextLinkable marginTop-double">{neos:contentElement.editable(property: 'lead', tag: 'span')}</div>
 
 						<f:if condition="{coverCollection}">
 				        	<div class="Article-CoverPhoto">{coverCollection -> f:format.raw()}</div>

@@ -15,7 +15,7 @@
 			<h3 class="Media-Title">
 				{title}
 			</h3>
-			<div class="Media-Teaser">{teaser -> f:format.raw()}</div>
+			<div class="Media-Teaser RteTextLinkable">{teaser -> f:format.raw()}</div>
 			<f:if condition="{date}">
 				<div class="Media-Date"><s:date format="{configuration.dateFormat}">{date}</s:date></div>
 			</f:if>
