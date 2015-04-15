@@ -41,23 +41,6 @@ prototype(Sfi.News:NewsDetail) < prototype(TYPO3.Neos:Content) {
 	moreItems = Sfi.News:NewsRelated{
 		newsCollection = ${q(site).find('[instanceof Sfi.News:News]').get()}
 	}
-
-
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
-	}
 }
 
 #Breif rendering of article, used in NewsList

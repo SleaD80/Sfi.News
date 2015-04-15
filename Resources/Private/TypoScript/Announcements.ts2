@@ -33,20 +33,15 @@ prototype(Sfi.News:AnnouncementsList) < prototype(Sfi.News:AbstractList) {
 		collection.@process.sortAgain = ${this.sortProperty ? q(value).sort(this.sortProperty, 'ASC').get() : value}
 		itemRenderer = Sfi.News:AnnouncementShort
 	}
-
 	@cache {
 		mode = 'cached'
 		maximumLifetime = '43200'
 		entryIdentifier {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
 		}
 		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
+			1 = ${'NodeType_Sfi.News:Announcement'}
 		}
 	}
 }

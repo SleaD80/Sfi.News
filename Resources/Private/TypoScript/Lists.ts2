@@ -15,22 +15,6 @@ prototype(Sfi.News:Listable) < prototype(TYPO3.Neos:Content) {
 			type = 'Sfi.News:NewsShort'
 		}
 	}
-
-	@cache {
-		mode = 'cached'
-		maximumLifetime = '86400'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
-		}
-		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
-	}
 }
 
 # Abstract List object
@@ -78,6 +62,18 @@ prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
 			type = ${itemRendererProperty}
 		}
 	}
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'Node_' + documentNode.identifier}
+			2 = ${'Node_' + rootNode.identifier}
+			3 = ${'DescendantOf_' + rootNode.identifier}
+		}
+	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
@@ -88,14 +84,17 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
 		attributes.data-columns = true
 	}
-	# TODO: find out why this doesn't work
-	# pagination = ${request.pluginArguments.news.currentPage}
 	@cache {
-		mode = 'uncached'
-		context {
-			1 = 'node'
-			2 = 'documentNode'
-			3 = 'site'
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+			# See PageObjects.ts2 to understand why it works
+			entryIdentifier = ${request.pluginArguments.sfi-today.currentPage}
+		}
+		entryTags {
+			1 = ${'Node_' + documentNode.identifier}
+			2 = ${'DescendantOf_' + documentNode.identifier}
 		}
 	}
 }
@@ -109,6 +108,17 @@ prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 		attributes.data-columns = true
 	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'NodeType_Sfi.News:AbstractNews'}
+		}
+	}
 }
 
 
@@ -117,6 +127,7 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	configuration = ${configuration}
 
 	prototype(Sfi.News:Listable) {
+		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 		collection.@process.filterOutSelf {
 			expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
 			@position = 'start'
@@ -126,6 +137,17 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	prototype(Sfi.News:NewsShort) {
 		@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
 		templatePath = 'resource://Sfi.News/Private/Templates/NewsShortSmall.html'
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'NodeType_Sfi.News:AbstractNews'}
+		}
 	}
 }
 
@@ -138,6 +160,17 @@ prototype(Sfi.News:TopList) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(site).find('[instanceof Sfi.News:ImportantMixin]').filter('[important = TRUE]').get()}
 		collection.@process.sort = ${q(value).count() > 0 ? q(value).sort('importantSort', 'ASC').get() : value}
 		itemRenderer = Sfi.News:TopShort
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'NodeType_Sfi.News:ImportantMixin'}
+		}
 	}
 }
 
@@ -157,20 +190,14 @@ prototype(Sfi.News:CategorizedList) < prototype(TYPO3.TypoScript:Tag) {
 			}
 		}
 	}
-
 	@cache {
 		mode = 'cached'
-		maximumLifetime = '86400'
 		entryIdentifier {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
-			format = ${request.format}
 		}
 		entryTags {
-			# Whenever the node changes the matched condition could change
-			1 = ${'Node_' + documentNode.identifier}
-			# Whenever one of the parent nodes changes the layout could change
-			2 = ${'DescendantOf_' + documentNode.identifier}
+			1 = ${'DescendantOf_' + documentNode.identifier}
 		}
 	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
@@ -185,6 +212,18 @@ prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 		collection.@process.filterByReference = ${q(node).property('tag') ? q(value).filterByReference('tags', q(node).property('tag')).get() : q(value).filterByReference('tags', documentNode).get()}
 		attributes.data-columns = true
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'NodeType_Sfi.News:AbstractNews'}
+			2 = ${'Node_' + node.identifier}
+		}
 	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
