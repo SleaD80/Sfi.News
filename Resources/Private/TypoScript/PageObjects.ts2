@@ -24,8 +24,8 @@ categoryPage = Sfi.Sfi:Page {
 	}
 	body.content.main = ${'<div class="row"><div class="columns">' + newsList + '</div></div>'}
 }
-categoryPage.@cache.entryIdentifier.pagination = ${request.pluginArguments.sfi-today.currentPage}
-root.@cache.entryIdentifier.pagination = ${request.pluginArguments.sfi-today.currentPage}
+categoryPage.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 
 root.categoryPage {
 	condition = ${q(node).is('[instanceof Sfi.News:Category]')}

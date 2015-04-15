@@ -90,7 +90,7 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
 			# See PageObjects.ts2 to understand why it works
-			entryIdentifier = ${request.pluginArguments.sfi-today.currentPage}
+			entryIdentifier = ${request.pluginArguments.listable-paginate.currentPage}
 		}
 		entryTags {
 			1 = ${'Node_' + documentNode.identifier}
