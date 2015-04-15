@@ -91,9 +91,6 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
-  constraints:
-    nodeTypes:
-      '*': false
 
 'Sfi.News:Rss':
   superTypes:
@@ -109,14 +106,18 @@
 
 'Sfi.News:CategorizedList':
   superTypes:
-    - 'Sfi.News:ListNode'
+    - 'TYPO3.Neos:Content'
   ui:
     label: 'Categorized Articles list'
+    inspector:
+      groups:
+        news:
+          label: 'News'
 
 
 'Sfi.News:ListByTag':
   superTypes:
-    - 'Sfi.News:ListNode'
+    - 'TYPO3.Neos:Content'
   ui:
     label: 'List news by tag'
     inspector:
