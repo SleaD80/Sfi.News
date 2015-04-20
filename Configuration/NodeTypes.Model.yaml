@@ -253,19 +253,6 @@ blah: &alohaRich
     originalIdentifier:
       type: string
 
-'Sfi.News:Announcement':
-  superTypes:
-    - 'Sfi.News:AbstractArticle'
-    - 'Sfi.News:ImportantMixin'
-  ui:
-    label: 'Announcement'
-  properties:
-    place:
-      ui:
-        inlineEditable: true
-        aloha:
-          <<: *alohaPlain
-          placeholder: 'Место анонса'
 
 'Sfi.News:Announcement':
   superTypes:

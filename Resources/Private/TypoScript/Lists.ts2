@@ -8,13 +8,7 @@ prototype(Sfi.News:Listable) < prototype(TYPO3.Neos:Content) {
 	collection.@process.sort = ${this.sortProperty ? q(value).sort(this.sortProperty, 'DESC').get() : value}
 	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(this.numberOfItems)).get() : value}
 
-	itemRenderer = TYPO3.TypoScript:Case {
-		default {
-			@position = 'end'
-			condition = TRUE
-			type = 'Sfi.News:NewsShort'
-		}
-	}
+	itemRenderer = Sfi.Shared:ContentCaseSmall
 }
 
 # Abstract List object
@@ -132,7 +126,6 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 			expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
 			@position = 'start'
 		}
-		itemRenderer = Sfi.News:NewsShort
 	}
 	prototype(Sfi.News:NewsShort) {
 		@override.configuration = ${Configuration.setting('Sfi.News.newsRelated')}
