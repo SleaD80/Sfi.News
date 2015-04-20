@@ -8,7 +8,7 @@ prototype(Sfi.News:Listable) < prototype(TYPO3.Neos:Content) {
 	collection.@process.sort = ${this.sortProperty ? q(value).sort(this.sortProperty, 'DESC').get() : value}
 	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(this.numberOfItems)).get() : value}
 
-	itemRenderer = Sfi.Shared:ContentCaseSmall
+	itemRenderer = Sfi.Shared:ContentCaseShort
 }
 
 # Abstract List object
