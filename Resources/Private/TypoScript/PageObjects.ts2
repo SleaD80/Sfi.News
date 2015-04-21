@@ -27,9 +27,9 @@ archivePage = Sfi.Sfi:Page {
 archivePage.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 
-root.categoryPage {
+root.archivePage {
 	condition = ${q(node).is('[instanceof Sfi.News:Category]')}
-	renderPath = '/categoryPage'
+	renderPath = '/archivePage'
 }
 
 # Redirects for RSS may be set in Routes.yaml
