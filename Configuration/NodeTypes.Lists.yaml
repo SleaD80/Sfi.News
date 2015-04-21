@@ -1,11 +1,11 @@
-'Sfi.News:ListNode':
+'Sfi.News:List':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
     label: 'List of listable things'
     icon: icon-list
     inlineEditable: true
-    group: news
+    group: lists
     inspector:
       groups:
         list:
@@ -109,6 +109,7 @@
     - 'TYPO3.Neos:Content'
   ui:
     label: 'Categorized Articles list'
+    group: lists
     inspector:
       groups:
         news:
@@ -120,6 +121,7 @@
     - 'TYPO3.Neos:Content'
   ui:
     label: 'List news by tag'
+    group: lists
     inspector:
       groups:
         news:

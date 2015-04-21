@@ -43,7 +43,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 }
 
 # List all Listable items descendant of current node
-prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
+prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.listNode')}
 	@override.configuration.@process.mergeConfiguration = ${NewsConfiguration.mergeWithNodeProperties(value, node)}
 	@override.itemRendererProperty = ${q(node).property('itemRenderer')}
@@ -71,8 +71,7 @@ prototype(Sfi.News:ListNode) < prototype(Sfi.News:AbstractList) {
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
-# List all Listable items descendant of current node. Used for News archive
-prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
+prototype(Sfi.News:Archive) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
 	prototype(Sfi.News:Listable) {
 		collection = ${q(documentNode).find('[instanceof Sfi.News:AbstractNews]').get()}

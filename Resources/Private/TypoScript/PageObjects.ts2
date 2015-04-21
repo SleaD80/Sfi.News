@@ -18,13 +18,13 @@ root.newsPage {
 }
 
 
-categoryPage = Sfi.Sfi:Page {
-	@override.newsList = Sfi.News:List {
+archivePage = Sfi.Sfi:Page {
+	@override.newsList = Sfi.News:Archive {
 		listTitle = ${q(node).property('title')}
 	}
 	body.content.main = ${'<div class="row"><div class="columns">' + newsList + '</div></div>'}
 }
-categoryPage.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+archivePage.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 
 root.categoryPage {
