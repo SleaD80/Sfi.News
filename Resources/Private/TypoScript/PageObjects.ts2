@@ -1,35 +1,8 @@
-announcementPage = Sfi.Sfi:Page
-announcementPage.body.content.main = Sfi.News:AnnouncementDetail
-root.announcementPage {
-	condition = ${q(node).is('[instanceof Sfi.News:Announcement]')}
-	renderPath = '/announcementPage'
-}
-
-newsPage = Sfi.Sfi:Page {
-	body {
-		content.main = Sfi.News:NewsDetail
-		breadcrumbMenu>
-	}
-}
-
-root.newsPage {
-	condition = ${q(node).is('[instanceof Sfi.News:News]')}
-	renderPath = '/newsPage'
-}
-
-
-archivePage = Sfi.Sfi:Page {
-	@override.newsList = Sfi.News:Archive {
+prototype(Sfi.News:Category) {
+	templatePath = 'resource://Sfi.News/Private/Templates/Archive.html'
+	newsList = Sfi.News:Archive {
 		listTitle = ${q(node).property('title')}
 	}
-	body.content.main = ${'<div class="row"><div class="columns">' + newsList + '</div></div>'}
-}
-archivePage.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
-root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
-
-root.archivePage {
-	condition = ${q(node).is('[instanceof Sfi.News:Category]')}
-	renderPath = '/archivePage'
 }
 
 # Redirects for RSS may be set in Routes.yaml

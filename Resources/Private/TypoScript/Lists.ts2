@@ -82,7 +82,7 @@ prototype(Sfi.News:Archive) < prototype(Sfi.News:AbstractList) {
 		entryIdentifier {
 			node = ${node}
 			editPreviewMode = ${editPreviewMode}
-			# See PageObjects.ts2 to understand why it works
+			# See Sfi.Sfi:Page to understand why it works
 			pagination = ${request.pluginArguments.listable-paginate.currentPage}
 		}
 		entryTags {

@@ -1,5 +1,5 @@
-prototype(Sfi.News:AnnouncementDetail) < prototype(Sfi.News:NewsDetail) {
-	templatePath = 'resource://Sfi.News/Private/Templates/AnnouncementDetail.html'
+prototype(Sfi.News:Announcement) < prototype(Sfi.News:News) {
+	templatePath = 'resource://Sfi.News/Private/Templates/Announcement.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.announcementDetail')}
 	configuration = ${configuration}
 
