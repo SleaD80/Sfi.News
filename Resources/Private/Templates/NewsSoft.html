@@ -53,17 +53,14 @@
 								</f:if>
 							</div>
 
+							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
+							<div class="Article-Assets">{assets -> f:format.raw()}</div>
+
 							<f:render partial="Tags" arguments="{tags: node.properties.tags}" />
 
 							<div class="marginTop-triple">
 								<f:render partial="Disqus" />
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="columns">
-							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
-							<div class="Article-Assets">{assets -> f:format.raw()}</div>
 						</div>
 					</div>
 				</div>
