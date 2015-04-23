@@ -36,6 +36,16 @@
 					<div class="row">
 						<div class="large-8 large-offset-2 columns">
 							<div class="Article-Content">{main -> f:format.raw()}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="columns">
+							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-8 large-offset-2 columns">
+							<div class="Article-Assets">{assets -> f:format.raw()}</div>
 							<div class="Article-Author marginTop-triple">
 								<f:if condition="{node.context.workspace.name} != 'live'">
 									<f:then>
@@ -52,9 +62,6 @@
 									</f:else>
 								</f:if>
 							</div>
-
-							<div class="Article-Gallery">{gallery -> f:format.raw()}</div>
-							<div class="Article-Assets">{assets -> f:format.raw()}</div>
 
 							<f:render partial="Tags" arguments="{tags: node.properties.tags}" />
 
