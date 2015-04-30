@@ -84,9 +84,6 @@ blah: &alohaRich
   superTypes:
     - 'TYPO3.Neos:Document'
     - 'Sfi.News:Listable'
-  constraints:
-    nodeTypes:
-      '*': false
   childNodes:
     main:
       type: 'TYPO3.Neos:ContentCollection'
