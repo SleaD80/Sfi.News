@@ -63,9 +63,10 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 			editPreviewMode = ${editPreviewMode}
 		}
 		entryTags {
-			1 = ${'Node_' + documentNode.identifier}
-			2 = ${'Node_' + rootNode.identifier}
-			3 = ${'DescendantOf_' + rootNode.identifier}
+			1 = ${'Node_' + node.identifier}
+			2 = ${'Node_' + documentNode.identifier}
+			3 = ${'Node_' + rootNode.identifier}
+			4 = ${'DescendantOf_' + rootNode.identifier}
 		}
 	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
