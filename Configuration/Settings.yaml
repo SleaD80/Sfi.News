@@ -94,10 +94,6 @@ Sfi:
       thumbnailWidth: 1440
       thumbnailHeight: 700
       dateFormat: d.m
-    rssList:
-      numberOfItems: 50
-      sortProperty: date
-      archiveLink: ''
     listByTag:
       numberOfItems: 10000
       paginationEnabled: true

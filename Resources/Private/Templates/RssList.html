@@ -9,8 +9,7 @@
         <yandex:logo type="square">http://sfi.ru/_Resources/Static/Packages/Sfi.Sfi/Images/sfiAnchorLarge.png</yandex:logo>
         <generator>TYPO3 Neos</generator>
 
-        <f:for each="{newsCollection}" as="news">
-            <ts:render path="itemRenderer" context="{node: news, inputConfiguration: configuration}" />
-        </f:for>
+        {childItems -> f:format.raw()}
+
     </channel>
 </rss>

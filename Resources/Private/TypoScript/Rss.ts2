@@ -1,12 +1,26 @@
-prototype(Sfi.News:RssList) < prototype(Sfi.News:AbstractList) {
+prototype(Sfi.News:RssList) < prototype(TYPO3.TypoScript:Template) {
 	templatePath = 'resource://Sfi.News/Private/Templates/RssList.html'
-	@override.configuration = ${Configuration.setting('Sfi.News.rssList')}
-	configuration = ${configuration}
-	newsCollection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').get()}
-	newsCollection.@process.yandexOnly = ${q(value).count() > 0 ? q(value).filter('[yandex = TRUE]').get() : value}
-	newsCollection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.subtract(Date.now(), 'P7D')).get() : value}
-	itemRenderer = Sfi.News:RssItem
-	@cache.maximumLifetime = '7200'
+	@override.collection = ${q(site).children('sfi-today').find('[instanceof Sfi.News:News]').get()}
+	@override.collection.@process.sort = ${q(value).sort('date', 'DESC').get()}
+	@override.collection.@process.yandexOnly = ${q(value).count() > 0 ? q(value).filter('[yandex = TRUE]').get() : value}
+	@override.collection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.subtract(Date.now(), 'P7D')).get() : value}
+	childItems = TYPO3.TypoScript:Collection {
+		collection = ${collection}
+		itemRenderer = Sfi.News:RssItem
+		itemName = 'node'
+	}
+	@cache {
+		mode = 'cached'
+		# First element in collection is the one, that expires soonest (see sortAgain)
+		maximumLifetime = ${q(collection).last().property('date').timestamp - Date.subtract(Date.now(), 'P7D').timestamp}
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+		}
+		entryTags {
+			1 = ${'NodeType_Sfi.News:AbstractNews'}
+		}
+	}
 }
 
 prototype(Sfi.News:RssItem) < prototype(TYPO3.TypoScript:Template) {
