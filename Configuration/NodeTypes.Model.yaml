@@ -39,6 +39,7 @@ blah: &alohaRich
     a: true
   alignment: {  }
 
+
 'Sfi.News:Category':
   superTypes:
     - 'TYPO3.Neos:Document'
@@ -55,6 +56,21 @@ blah: &alohaRich
     main:
       type: 'TYPO3.Neos:ContentCollection'
   properties:
+    preset:
+      defaultValue: 'newsArchive'
+      type: string
+      ui:
+        label: 'Settings preset'
+        reloadIfChanged: true
+        inspector:
+          group: news
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              'newsArchive':
+                label: 'News Archive (SFI-today)'
+              'publishedBooksArchive':
+                label: 'Published Books Archive'
     variant:
       defaultValue: 'Hard'
       type: string
@@ -73,7 +89,7 @@ blah: &alohaRich
   constraints:
     nodeTypes:
       '*': false
-      'Sfi.News:AbstractArticle': true
+      'Sfi.News:Listable': true
       'Sfi.News:Category': true
 
 'Sfi.News:Listable':

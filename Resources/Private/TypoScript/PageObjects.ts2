@@ -1,10 +1,3 @@
-prototype(Sfi.News:Category) {
-	templatePath = 'resource://Sfi.News/Private/Templates/Archive.html'
-	newsList = Sfi.News:Archive {
-		listTitle = ${q(node).property('title')}
-	}
-}
-
 # Redirects for RSS may be set in Routes.yaml
 rssPage = TYPO3.TypoScript:Http.Message {
 	httpResponseHead.headers.Content-Type = 'application/xml'

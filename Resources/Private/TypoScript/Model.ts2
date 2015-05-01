@@ -64,3 +64,17 @@ prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
 	configuration = ${configuration}
 }
+
+
+prototype(Sfi.News:Category) {
+	@override.rootNode = ${q(documentNode).parent().is('[instanceof Sfi.News:Category]') ? q(documentNode).parent().get(0) : documentNode}
+	@override.configuration = ${Configuration.setting('Sfi.News.' + q(q(documentNode).parent().is('[instanceof Sfi.News:Category]') ? q(documentNode).parent().get(0) : documentNode).property('preset'))}
+	templatePath = 'resource://Sfi.News/Private/Templates/NewsCategory.html'
+	partialRootPath = 'resource://Sfi.Sfi/Private/Partials'
+	layoutRootPath = 'resource://Sfi.Sfi/Private/Layouts'
+	
+	layout = ${configuration.layout}
+
+	sectionMenu = ${sectionMenu}
+	newsList = Sfi.News:Archive
+}

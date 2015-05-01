@@ -26,18 +26,36 @@ Sfi:
       class: 'row'
       itemClass: 'medium-4 columns'
       archiveLink: ''
-    newsList:
+    newsArchive:
       numberOfItems: 10000
       paginationEnabled: true
       pagination:
         itemsPerPage: 24
         maximumNumberOfLinks: 15
       sortProperty: date
-      listTitle: 'СФИ сегодня'
+      listTitle: ''
       listTitleClass: 'SectionDivider--Service'
       class: 'NewsList-Grid row'
+      dataColumns: true
       itemClass: ''
       archiveLink: ''
+      showOnlyNews: true
+      layout: 'ContentDefault'
+    publishedBooksArchive:
+      numberOfItems: 10000
+      paginationEnabled: true
+      pagination:
+        itemsPerPage: 24
+        maximumNumberOfLinks: 15
+      sortProperty: date
+      listTitle: ''
+      listTitleClass: 'PageTitle'
+      class: 'medium-block-grid-2'
+      dataColumns: false
+      itemClass: ''
+      archiveLink: ''
+      showOnlyNews: false
+      layout: 'ContentWithSidebar'
     articlesList:
       numberOfItems: 100
       pagination: ~

@@ -72,27 +72,6 @@ prototype(Sfi.News:List) < prototype(Sfi.News:AbstractList) {
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
 }
 
-prototype(Sfi.News:Archive) < prototype(Sfi.News:AbstractList) {
-	@override.configuration = ${Configuration.setting('Sfi.News.newsList')}
-	prototype(Sfi.News:Listable) {
-		collection = ${q(documentNode).find('[instanceof Sfi.News:AbstractNews]').get()}
-		attributes.data-columns = true
-	}
-	@cache {
-		mode = 'cached'
-		entryIdentifier {
-			node = ${node}
-			editPreviewMode = ${editPreviewMode}
-			# See Sfi.Sfi:Page to understand why it works
-			pagination = ${request.pluginArguments.listable-paginate.currentPage}
-		}
-		entryTags {
-			1 = ${'Node_' + documentNode.identifier}
-			2 = ${'DescendantOf_' + documentNode.identifier}
-		}
-	}
-}
-
 # Show latest news
 prototype(Sfi.News:Latest) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.newsLatest')}
@@ -219,4 +198,41 @@ prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 		}
 	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
+}
+
+
+prototype(Sfi.News:CategoryMenu) < prototype(TYPO3.Neos:Menu) {
+	templatePath = 'resource://Sfi.News/Private/Templates/CategoryMenu.html'
+
+	rootNode = ${rootNode}
+	rootIsCurrent = ${rootNode == documentNode ? true : false}
+
+	itemCollection = ${q(rootNode).children('[instanceof Sfi.News:Category]').get()}
+}
+
+prototype(Sfi.News:Archive) < prototype(Sfi.News:AbstractList) {
+	#Requires configuration and rootNode context vars to be set (in News:Category)
+	content.listTitleTag.content = ${configuration.listTitle ? configuration.listTitle : rootNode.properties.title}
+	content.listTitleTag.@if.isSet = ${true}
+
+	content.listMenu = Sfi.News:CategoryMenu
+	content.listMenu.@position = 'after listTitleTag'
+
+	prototype(Sfi.News:Listable) {
+		collection = ${configuration.showOnlyNews ? q(documentNode).find('[instanceof Sfi.News:AbstractNews]').get() : q(documentNode).find('[instanceof Sfi.News:Listable]').get()}
+		attributes.data-columns = ${configuration.dataColumns ? true : false}
+	}
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${editPreviewMode}
+			# See Sfi.Sfi:Page to understand why it works
+			pagination = ${request.pluginArguments.listable-paginate.currentPage}
+		}
+		entryTags {
+			1 = ${'Node_' + documentNode.identifier}
+			2 = ${'DescendantOf_' + documentNode.identifier}
+		}
+	}
 }
