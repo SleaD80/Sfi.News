@@ -11,7 +11,7 @@ prototype(Sfi.News:RssList) < prototype(TYPO3.TypoScript:Template) {
 	}
 	@cache {
 		mode = 'cached'
-		# First element in collection is the one, that expires soonest (see sortAgain)
+		# Elements should be removed, once their age reaches 1W. Find out the time last element in collection has left to live
 		maximumLifetime = ${q(collection).last().property('date').timestamp - Date.subtract(Date.now(), 'P7D').timestamp}
 		entryIdentifier {
 			node = ${node}
