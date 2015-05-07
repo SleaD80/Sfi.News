@@ -186,7 +186,7 @@ blah: &alohaRich
           group: news
           editorOptions:
             nodeTypes:
-              - 'TYPO3.Neos.NodeTypes:Page'
+              - 'TYPO3.Neos:Document'
 
 
 'Sfi.News:ImportantMixin':
