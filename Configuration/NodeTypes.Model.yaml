@@ -145,7 +145,7 @@ blah: &alohaRich
           <<: *alohaRich
           placeholder: 'Лид'
     date:
-      type: date
+      type: DateTime
       defaultValue: 'now'
       ui:
         label: Date
@@ -281,7 +281,7 @@ blah: &alohaRich
           <<: *alohaPlain
           placeholder: 'Место анонса'
     dateStart:
-      type: date
+      type: DateTime
       defaultValue: ''
       ui:
         label: 'Дата начала анонса'

@@ -16,7 +16,7 @@ prototype(Sfi.News:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
 	attributes.class = ${configuration.wrapClass}
 	content = TYPO3.TypoScript:Array {
 		listTitleTag = TYPO3.TypoScript:Tag {
-			tagName = h2
+			tagName = 'h2'
 			attributes.class = ${configuration.listTitleClass}
 			content = ${configuration.listTitle}
 			@if.isSet = ${configuration.listTitle != ''}
