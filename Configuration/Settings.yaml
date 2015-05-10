@@ -15,7 +15,7 @@ Sfi:
   News:
     listNode:
       numberOfItems: 10000
-      paginationEnabled: true
+      paginationEnabled: false
       pagination:
         itemsPerPage: 24
         maximumNumberOfLinks: 15
