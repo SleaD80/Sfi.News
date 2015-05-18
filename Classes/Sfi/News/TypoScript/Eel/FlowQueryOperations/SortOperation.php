@@ -65,7 +65,12 @@ class SortOperation extends AbstractOperation {
 			$nodesByIdentifier = array();
 			/** @var Node $node  */
 			foreach ($nodes as $node) {
-				$propertyValue = $node->getProperty($sortByPropertyPath);
+				if ($sortByPropertyPath[0] === '_') {
+					$propertyValue = \TYPO3\Flow\Reflection\ObjectAccess::getPropertyPath($node, substr($sortByPropertyPath, 1));
+				} else {
+					$propertyValue = $node->getProperty($sortByPropertyPath);
+				}
+
 				if ($propertyValue instanceof \DateTime) {
 					$propertyValue = $propertyValue->getTimestamp();
 				}

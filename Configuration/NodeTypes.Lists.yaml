@@ -26,6 +26,14 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+    sortOrder:
+      type: string
+      defaultValue: 'date'
+      ui:
+        label: 'Sort order'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
     wrapClass:
       type: string
       defaultValue: ''

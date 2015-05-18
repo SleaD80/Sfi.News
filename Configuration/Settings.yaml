@@ -19,6 +19,7 @@ Sfi:
       pagination:
         itemsPerPage: 24
         maximumNumberOfLinks: 15
+      sortOrder: 'DESC'
       sortProperty: 'date'
       itemRenderer: ''
       listTitle: ''
