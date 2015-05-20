@@ -182,9 +182,10 @@ prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 	@override.configuration = ${Configuration.setting('Sfi.News.listByTag')}
 	configuration = ${configuration}
 
+	@override.collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
+	@override.collection.@process.filterByReference = ${q(node).property('tag') ? q(value).filterByReference('tags', q(node).property('tag')).get() : q(value).filterByReference('tags', documentNode).get()}
 	prototype(Sfi.News:Listable) {
-		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
-		collection.@process.filterByReference = ${q(node).property('tag') ? q(value).filterByReference('tags', q(node).property('tag')).get() : q(value).filterByReference('tags', documentNode).get()}
+		collection = ${collection}
 		attributes.data-columns = true
 	}
 
@@ -200,6 +201,7 @@ prototype(Sfi.News:ListByTag) < prototype(Sfi.News:AbstractList) {
 		}
 	}
 	@process.contentElementWrapping = TYPO3.Neos:ContentElementWrapping
+	@if.notEmpty = ${q(collection).count() > 0}
 }
 
 
