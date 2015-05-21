@@ -4,6 +4,10 @@ prototype(Sfi.News:RssList) < prototype(TYPO3.TypoScript:Template) {
 	@override.collection.@process.sort = ${q(value).sort('date', 'DESC').get()}
 	@override.collection.@process.yandexOnly = ${q(value).count() > 0 ? q(value).filter('[yandex = TRUE]').get() : value}
 	@override.collection.@process.filterByDate = ${q(value).count() > 0 ? q(value).filterByDate('date', Date.subtract(Date.now(), 'P7D')).get() : value}
+
+	# TODO fix
+	tempString = '<yandex:logo>http://sfi.ru/_Resources/Static/Packages/Sfi.Sfi/Images/sfiAnchorLarge.png</yandex:logo><yandex:logo type="square">http://sfi.ru/_Resources/Static/Packages/Sfi.Sfi/Images/sfiAnchorLarge.png</yandex:logo>'
+
 	childItems = TYPO3.TypoScript:Collection {
 		collection = ${collection}
 		itemRenderer = Sfi.News:RssItem
@@ -33,5 +37,6 @@ prototype(Sfi.News:RssItem) < prototype(TYPO3.TypoScript:Template) {
 	@override.main = TYPO3.Neos:ContentCollection{
 		nodePath = 'main'
 	}
-	bodytext = ${String.Trim(String.htmlSpecialChars(String.stripTags(main)))}
+	# TODO fix
+	bodytext = ${'<yandex:full-text>' + String.Trim(String.htmlSpecialChars(String.stripTags(main))) + '</yandex:full-text>'}
 }
