@@ -2,7 +2,7 @@
 {namespace m=TYPO3\Media\ViewHelpers}
 {namespace s=Sfi\Shared\ViewHelpers}
 
-<div class="MediaSlide Cover" style="background-image:url('{m:uri.image(asset:thumbnailImage.properties.image, maximumWidth: configuration.thumbnailWidth, maximumHeight: configuration.thumbnailHeight, allowCropping: true, allowUpScaling: true)}')">
+<div class="MediaSlide Cover" style="background-image:url('{m:uri.image(asset:thumbnailImage, maximumWidth: configuration.thumbnailWidth, maximumHeight: configuration.thumbnailHeight, allowCropping: true, allowUpScaling: true)}')">
 	<neos:link.node node="{node}">
 		<div class="row">
 			<div class="MediaSlide-Wrap columns">

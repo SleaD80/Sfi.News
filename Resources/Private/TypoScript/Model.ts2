@@ -63,6 +63,7 @@ prototype(Sfi.News:TopShort) < prototype(Sfi.News:NewsShort) {
 	templatePath = 'resource://Sfi.News/Private/Templates/TopShort.html'
 	@override.configuration = ${Configuration.setting('Sfi.News.topShort')}
 	configuration = ${configuration}
+	thumbnailImage = ${q(node).property('coverImage') ? q(node).property('coverImage') : q(node).children('coverCollection').children().first().property('image')}
 }
 
 
