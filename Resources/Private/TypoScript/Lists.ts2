@@ -104,7 +104,7 @@ prototype(Sfi.News:NewsRelated) < prototype(Sfi.News:AbstractList) {
 	prototype(Sfi.News:Listable) {
 		collection = ${q(site).find('[instanceof Sfi.News:AbstractNews]').get()}
 		collection.@process.filterOutSelf {
-			expression = ${q(value).filter('[_name != ' + q(node).property('_name') + ']').get()}
+			expression = ${q(value).filter('[_identifier != "' + documentNode.identifier + '"]').get()}
 			@position = 'start'
 		}
 	}
